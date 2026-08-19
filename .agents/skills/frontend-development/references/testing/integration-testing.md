@@ -113,7 +113,7 @@ Browser-like DOM
 
 Isso continua sendo frontend integration.
 
-Se exige browser real + backend + database/ambiente, use a skill geral `testing`.
+Se exige browser real + backend + database/ambiente, use a skill `quality-assurance`.
 
 ## Do Not Require a Real Backend
 

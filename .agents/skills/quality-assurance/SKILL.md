@@ -1,6 +1,6 @@
 ---
 name: quality-assurance
-description: Planeja, implementa, executa, diagnostica e revisa testes end-to-end automatizados com Playwright, incluindo jornadas críticas, dados isolados, ambiente E2E, autenticação, paralelismo e análise de falhas. Use quando a tarefa envolver QA, E2E, Playwright, acceptance/regression tests no browser, criação ou revisão de cenários automatizados, investigação de testes flaky ou configuração da suíte E2E.
+description: Planeja, implementa, executa, diagnostica e revisa E2E com Playwright e jornadas completas no browser somente conforme uma spec aplicável em specs/. Use para testes de aceitação ou regressão no browser, configuração e diagnóstico da suíte E2E e investigação de testes browser flaky. Não use para revisão manual sem browser ou testes unitários e de integração de frontend ou backend.
 ---
 
 # Quality Assurance
@@ -11,18 +11,54 @@ Atue como QA focado em confiança end-to-end do sistema através de testes autom
 
 ## Workflow
 
-Antes de criar ou alterar um teste:
+1. Identifique a capability, feature ou bug e localize a spec correspondente em `specs/` pelo caminho, nome ou identificador informado.
+2. Leia a spec completa antes de criar ou alterar testes.
+3. Extraia objetivo, escopo, comportamento esperado, critérios de aceite, regras de negócio, estados e falhas, restrições técnicas e impactos em frontend, backend e E2E.
+4. Identifique quais critérios de aceite exigem browser e transforme-os em jornadas observáveis.
+5. Distinga as precondições de setup das interações browser que a jornada valida.
+6. Verifique a infraestrutura E2E e inspecione a implementação e a suíte existentes.
+7. Identifique os boundaries afetados e carregue somente as references necessárias.
+8. Prepare dados isolados conforme as regras da spec.
+9. Implemente somente jornadas justificadas por critérios de aceite.
+10. Execute os cenários relacionados usando comandos existentes.
+11. Em falhas, preserve traces, screenshots e relatórios disponíveis e diagnostique antes de alterar retry, timeout ou expectativa.
+12. Confira cada jornada contra seu critério de aceite antes de concluir.
 
-1. Leia a spec, acceptance criteria ou comportamento esperado da feature.
-2. Inspecione a implementação e a suíte E2E existentes.
-3. Determine se o risco realmente exige E2E.
-4. Defina preconditions, user intent e observable outcome.
-5. Identifique quais referências são necessárias.
-6. Prepare dados e ambiente de forma isolada e reproduzível.
-7. Implemente a journey com Playwright.
-8. Execute o menor conjunto relevante de tests usando comandos existentes.
-9. Se falhar, diagnostique antes de alterar retry, timeout ou expectativa.
-10. Execute validações relacionadas antes de concluir.
+## Spec Gate
+
+[HARD RULE] Trate `specs/` como a fonte oficial de requisitos, comportamento, critérios de aceite e escopo. Não invente um formato de spec; trabalhe com o formato versionado existente.
+
+Siga esta precedência:
+
+1. restrições do sistema e requisitos críticos de segurança;
+2. spec vigente em `specs/`;
+3. código e testes existentes, somente como contexto técnico;
+4. references desta skill;
+5. convenções genéricas da ferramenta;
+6. pedido informal do usuário, quando não contradizer a spec.
+
+[HARD RULE] Sem spec válida, não altere código nem testes, não crie jornada provisória e não infira requisitos do pedido ou do comportamento atual. Informe o bloqueio e solicite o caminho, identificador ou conteúdo da spec. Permita somente diagnóstico documental ou análise do estado atual, sem implementar correções.
+
+[HARD RULE] Se a spec omitir uma decisão que altere a jornada, liste a informação ausente e os cenários, dados ou assertions afetados e aguarde esclarecimento ou atualização da spec.
+
+[HARD RULE] Se houver mais de uma spec candidata, liste-as e solicite o identificador correto; não escolha apenas pela proximidade do nome.
+
+[HARD RULE] Se o pedido contradizer a spec, informe o conflito e solicite a atualização da spec. Não implemente o pedido informal enquanto a spec vigente não o autorizar.
+
+## Infrastructure Gate
+
+Antes de usar Playwright, confirme:
+
+- dependência instalada;
+- configuração do runner;
+- scripts disponíveis;
+- base URL;
+- serviços necessários;
+- banco ou sandbox;
+- estratégia de autenticação;
+- browsers e workers configurados.
+
+[HARD RULE] Se a infraestrutura necessária não existir, não invente comandos, URLs, portas, credenciais ou serviços e não instale dependências automaticamente. Bloqueie a implementação E2E e informe exatamente qual pré-requisito exigido pela spec não está disponível.
 
 ## QA Principles
 
@@ -65,7 +101,7 @@ Referências relacionadas dentro de um arquivo não devem ser carregadas automat
 ### Review Strategy
 
 [DEFAULT] Em revisão de QA/E2E, comece por:
-[review-checklist.md](references/review-checklist.md)
+[review-checklist.md](references/e2e/review-checklist.md)
 
 Se um item falhar ou permanecer ambíguo, carregue somente a referência detalhada correspondente.
 
@@ -76,32 +112,32 @@ Se um item falhar ou permanecer ambíguo, carregue somente a referência detalha
 ## Test Scenarios
 
 - Seleção do nível E2E, system boundary, critical journeys, happy/failure paths, auth/authorization, coverage e observable outcomes:
-  [test-scenarios.md](references/test-scenarios.md)
+  [test-scenarios.md](references/e2e/test-scenarios.md)
 
 ## Test Data
 
 - Preconditions, factories/builders, API/DB setup, users/roles, uniqueness, parallel isolation, cleanup e retry-safe data:
-  [test-data.md](references/test-data.md)
+  [test-data.md](references/e2e/test-data.md)
 
 ## Environment
 
 - Application/services lifecycle, readiness, base URLs, database strategy, external sandboxes, projects, browsers, workers, sharding e CI:
-  [environment.md](references/environment.md)
+  [environment.md](references/e2e/environment.md)
 
 ## Playwright
 
 - Locators, actions, auto-waiting, assertions, navigation, authentication, API setup, fixtures, hooks e Page Objects:
-  [playwright.md](references/playwright.md)
+  [playwright.md](references/e2e/playwright.md)
 
 ## Failure Diagnosis
 
 - Product-vs-test classification, flakiness, retries, timeouts, trace, screenshots/videos, reports, CI-only failures e quarantine:
-  [failure-diagnosis.md](references/failure-diagnosis.md)
+  [failure-diagnosis.md](references/e2e/failure-diagnosis.md)
 
 ## Review
 
 - Revisão consolidada da suíte E2E:
-  [review-checklist.md](references/review-checklist.md)
+  [review-checklist.md](references/e2e/review-checklist.md)
 
 ---
 
@@ -111,7 +147,7 @@ Se um item falhar ou permanecer ambíguo, carregue somente a referência detalha
 
 Preconditions fora do objetivo podem usar APIs/helpers controlados.
 
-[HARD RULE] API setup não pode substituir a journey que o cenário pretende validar.
+[HARD RULE] API, banco ou helper podem preparar apenas o estado inicial quando isso não substituir a interação browser que a spec exige validar.
 
 [HARD RULE] Cenários devem executar independentemente e não depender de ordem.
 
@@ -167,34 +203,35 @@ failure
 
 ```text
 quality-assurance
-→ automated E2E
-→ browser journeys
-→ test environment/data
+→ E2E e jornadas completas no browser
 → Playwright
-→ E2E failure diagnosis
+→ ambiente, dados e diagnóstico da suíte E2E
 
-frontend-development/testing
-→ frontend unit/integration
+frontend-development
+→ unit e integration frontend
+→ acessibilidade frontend
+→ segurança do browser
+→ performance frontend
 
-backend testing skill/references
-→ backend unit/integration
-
-security/performance/accessibility skills
-→ specialized non-E2E review
+backend-development
+→ unit e integration backend
 ```
 
-E2E pode exercitar security, accessibility ou performance-sensitive flows, mas não substitui as referências especializadas desses domínios.
+Use as references de acessibilidade, segurança e performance de `frontend-development` para esses domínios no frontend. E2E pode exercitar fluxos sensíveis a esses atributos, mas não substitui essas references.
+
+[HARD RULE] Qualquer jornada completa no browser pertence a `quality-assurance`; testes unitários e de integração permanecem com a skill do boundary correspondente.
 
 ## Finalization
 
 Antes de concluir:
 
-1. confirme que o scenario protege o comportamento esperado;
+1. relacione cada scenario ao critério de aceite que ele protege;
 2. confirme que setup não bypassa a capability sob teste;
 3. confirme independência e isolamento de dados;
 4. execute o test/scenario relacionado;
 5. investigue qualquer retry/flakiness em vez de mascará-lo;
 6. execute a suíte relacionada quando a mudança puder afetar outros journeys;
-7. preserve artifacts úteis quando houver falha.
+7. preserve artifacts úteis quando houver falha;
+8. não conclua com critério browser não coberto ou não verificável; registre a lacuna ou solicite que a spec defina um resultado observável.
 
 [HARD RULE] Não invente comandos, portas, URLs, credentials, services ou scripts. Use a configuração e os comandos existentes no repositório.

@@ -1,6 +1,6 @@
 ---
 name: frontend-development
-description: Implementa, altera, corrige e revisa frontend React com TypeScript, incluindo arquitetura, formulários, estados de UI, acessibilidade, segurança, React Router, performance, Tailwind e testes frontend. Use quando a tarefa envolver código, comportamento, styling, estrutura, tipagem, navegação, segurança, performance ou revisão do frontend.
+description: Implementa, altera, corrige e revisa frontend React com TypeScript somente conforme uma spec aplicável em specs/. Use para arquitetura frontend, componentes, hooks, formulários, estados de UI, acessibilidade, segurança do browser, performance, Tailwind, React Router e testes unitários ou de integração frontend. Não use para jornadas E2E completas no browser; encaminhe-as para quality-assurance.
 ---
 
 # Frontend Development
@@ -9,15 +9,40 @@ Trabalhe exclusivamente no frontend quando a tarefa não exigir mudanças em out
 
 ## Workflow
 
-Antes de alterar código:
+1. Identifique a capability, feature ou bug e localize a spec correspondente em `specs/` pelo caminho, nome ou identificador informado.
+2. Leia a spec completa antes de alterar código ou testes.
+3. Extraia objetivo, escopo, comportamento esperado, critérios de aceite, regras de negócio, estados e falhas, restrições técnicas e impactos em frontend, backend e E2E.
+4. Mapeie cada critério de aceite aplicável para um comportamento frontend observável.
+5. Inspecione `package.json`, `tsconfig`, configuração Vite, scripts, dependências, implementação e testes existentes.
+6. Confirme que Tailwind, React Router, a biblioteca de testes e qualquer outra ferramenta necessária já estão configurados antes de usá-los.
+7. Compare a implementação atual com a spec e identifique os boundaries afetados.
+8. Identifique somente os domínios envolvidos e carregue apenas as references necessárias.
+9. Implemente apenas o que a spec exige, usando o código existente somente para localizar integrações e preservar compatibilidade que não a contradiga.
+10. Crie ou atualize testes para os critérios de aceite relevantes no boundary frontend.
+11. Execute as validações relacionadas e confira novamente cada critério de aceite antes de concluir.
 
-1. Leia a especificação da feature correspondente.
-2. Inspecione a implementação existente.
-3. Identifique componentes, tipos, padrões e testes reutilizáveis.
-4. Identifique quais domínios da tarefa exigem referência.
-5. Consulte somente os arquivos diretamente relacionados.
-6. Implemente preservando os padrões existentes do projeto.
-7. Valide a mudança antes de concluir.
+## Spec Gate
+
+[HARD RULE] Trate `specs/` como a fonte oficial de requisitos, comportamento, critérios de aceite e escopo. Não invente um formato de spec; trabalhe com o formato versionado existente.
+
+Siga esta precedência:
+
+1. restrições do sistema e requisitos críticos de segurança;
+2. spec vigente em `specs/`;
+3. código e testes existentes, somente como contexto técnico;
+4. references desta skill;
+5. convenções genéricas do framework;
+6. pedido informal do usuário, quando não contradizer a spec.
+
+[HARD RULE] Se não houver spec válida, não altere código nem testes, não crie comportamento provisório e não infira requisitos do pedido ou da implementação atual. Informe o bloqueio e solicite o caminho, identificador ou conteúdo da spec. Permita somente diagnóstico documental ou análise do estado atual, sem implementar correções.
+
+[HARD RULE] Se a spec omitir uma decisão que altere a implementação, liste a informação ausente e os pontos afetados e aguarde esclarecimento ou atualização da spec antes de modificar código.
+
+[HARD RULE] Se houver mais de uma spec candidata, liste-as e solicite o identificador correto; não escolha apenas pela proximidade do nome.
+
+[HARD RULE] Se o pedido contradizer a spec, informe o conflito e solicite a atualização da spec. Não implemente o pedido informal enquanto a spec vigente não o autorizar.
+
+[HARD RULE] Não instale nem invente ferramenta, configuração ou comando porque uma reference os menciona.
 
 ## Reference Loading Rules
 
@@ -306,7 +331,15 @@ Use estas referências para riscos específicos do frontend/browser. Autenticaç
 
 Use estas referências para unit e integration testing do frontend.
 
-[HARD RULE] Fluxos E2E completos pertencem à skill geral `testing`.
+[HARD RULE] Fluxos E2E completos pertencem à skill `quality-assurance`.
+
+Classifique o teste pelo boundary definido na spec:
+
+- lógica pura e regras isoladas → unit test frontend;
+- colaboração entre componentes, hooks, estado e data-access → integration test frontend;
+- fluxo completo atravessando browser e sistema → `quality-assurance`.
+
+[HARD RULE] Relacione cada teste a um comportamento ou critério de aceite da spec. Não crie testes apenas para aumentar cobertura numérica.
 
 - Escolha do nível, distribuição de cenários, coverage e regression strategy:
   [test-strategy.md](references/testing/test-strategy.md)
@@ -348,10 +381,11 @@ Use estas referências para unit e integration testing do frontend.
 
 Antes de concluir:
 
-1. confirme que a implementação atende à spec;
-2. execute o typecheck configurado no projeto;
-3. execute os testes relacionados à mudança;
-4. execute o lint configurado no projeto;
-5. corrija falhas encontradas e repita as validações afetadas.
+1. confira cada critério de aceite frontend contra a implementação e os testes;
+2. registre qualquer critério não coberto ou não verificável e não conclua até a spec definir um resultado observável;
+3. execute o typecheck configurado no projeto;
+4. execute os testes relacionados à mudança;
+5. execute o lint configurado no projeto;
+6. corrija falhas encontradas e repita as validações afetadas.
 
 [HARD RULE] Não invente comandos ou ferramentas. Use os scripts e configurações existentes no projeto.

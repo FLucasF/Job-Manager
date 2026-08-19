@@ -70,7 +70,7 @@ Unit Testing
 Integration Testing
 ```
 
-[HARD RULE] Fluxos que exigem browser real + frontend + backend/ambiente real pertencem à skill geral `testing`.
+[HARD RULE] Fluxos que exigem browser real + frontend + backend/ambiente real pertencem à skill `quality-assurance`.
 
 Frontend integration pode executar grande parte da aplicação React com a fronteira externa controlada sem se tornar E2E.
 
@@ -140,7 +140,7 @@ Se sim:
 → E2E
 ```
 
-Use a skill geral `testing`.
+Use a skill `quality-assurance`.
 
 ## Classify Tests by Behavior, Not File Type
 

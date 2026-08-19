@@ -92,7 +92,7 @@ frontend collaboration
 
 Mocks do próprio sistema devem ser minimizados quando o objetivo é validar o fluxo completo.
 
-E2E pertence à skill geral `testing`.
+E2E pertence à skill `quality-assurance`.
 
 ## Prefer Real Internal Code
 
