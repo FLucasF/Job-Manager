@@ -1,68 +1,47 @@
 ---
 name: frontend-development
-description: Implementa, altera, corrige e revisa frontend React com TypeScript somente conforme uma spec aplicável em specs/. Use para arquitetura frontend, componentes, hooks, formulários, estados de UI, acessibilidade, segurança do browser, performance, Tailwind, React Router e testes unitários ou de integração frontend. Não use para jornadas E2E completas no browser; encaminhe-as para quality-assurance.
+description: Implementa, altera, corrige e revisa frontend React com TypeScript somente conforme um package Ready aplicável em specs/. Use para arquitetura frontend, componentes, hooks, formulários, estados de UI, acessibilidade, segurança do browser, performance, Tailwind, React Router e testes unitários ou de integração frontend. Não use para jornadas E2E completas no browser; encaminhe-as para quality-assurance.
 ---
 
 # Frontend Development
 
-Trabalhe exclusivamente no frontend quando a tarefa não exigir mudanças em outras aplicações.
+Use esta skill para mudanças e revisões no boundary React/TypeScript.
+`AGENTS.md` governa o gate de specs, RPI, arquitetura, segurança, validação e
+conclusão.
+
+Research deve consumir `spec.md`, `design.md` e `tasks.md` do package Ready,
+além do contrato aplicável. O Plan local da task não redefine esses artefatos.
+Após a implementação, a evidência pertence à validation independente em
+`validation.md`.
 
 ## Workflow
 
-1. Identifique a capability, feature ou bug e localize a spec correspondente em `specs/` pelo caminho, nome ou identificador informado.
-2. Leia a spec completa antes de alterar código ou testes.
-3. Extraia objetivo, escopo, comportamento esperado, critérios de aceite, regras de negócio, estados e falhas, restrições técnicas e impactos em frontend, backend e E2E.
-4. Mapeie cada critério de aceite aplicável para um comportamento frontend observável.
-5. Inspecione `package.json`, `tsconfig`, configuração Vite, scripts, dependências, implementação e testes existentes.
-6. Confirme que Tailwind, React Router, a biblioteca de testes e qualquer outra ferramenta necessária já estão configurados antes de usá-los.
-7. Compare a implementação atual com a spec e identifique os boundaries afetados.
-8. Identifique somente os domínios envolvidos e carregue apenas as references necessárias.
-9. Implemente apenas o que a spec exige, usando o código existente somente para localizar integrações e preservar compatibilidade que não a contradiga.
-10. Crie ou atualize testes para os critérios de aceite relevantes no boundary frontend.
-11. Execute as validações relacionadas e confira novamente cada critério de aceite antes de concluir.
-
-## Spec Gate
-
-[HARD RULE] Trate `specs/` como a fonte oficial de requisitos, comportamento, critérios de aceite e escopo. Não invente um formato de spec; trabalhe com o formato versionado existente.
-
-Siga esta precedência:
-
-1. restrições do sistema e requisitos críticos de segurança;
-2. spec vigente em `specs/`;
-3. código e testes existentes, somente como contexto técnico;
-4. references desta skill;
-5. convenções genéricas do framework;
-6. pedido informal do usuário, quando não contradizer a spec.
-
-[HARD RULE] Se não houver spec válida, não altere código nem testes, não crie comportamento provisório e não infira requisitos do pedido ou da implementação atual. Informe o bloqueio e solicite o caminho, identificador ou conteúdo da spec. Permita somente diagnóstico documental ou análise do estado atual, sem implementar correções.
-
-[HARD RULE] Se a spec omitir uma decisão que altere a implementação, liste a informação ausente e os pontos afetados e aguarde esclarecimento ou atualização da spec antes de modificar código.
-
-[HARD RULE] Se houver mais de uma spec candidata, liste-as e solicite o identificador correto; não escolha apenas pela proximidade do nome.
-
-[HARD RULE] Se o pedido contradizer a spec, informe o conflito e solicite a atualização da spec. Não implemente o pedido informal enquanto a spec vigente não o autorizar.
-
-[HARD RULE] Não instale nem invente ferramenta, configuração ou comando porque uma reference os menciona.
+1. A partir da Research concluída contra o package Ready, mapeie critérios de aceite frontend para
+   estados e comportamentos observáveis.
+2. Inspecione somente implementação, testes, `package.json`, TypeScript, Vite e
+   configurações dos boundaries afetados.
+3. Confirme que React Router, Tailwind, biblioteca de testes e outras ferramentas
+   necessárias já fazem parte da arquitetura e configuração.
+4. Carregue a menor combinação de referências para os problemas técnicos
+   concretos abaixo.
+5. Mantenha componentes e feature code isolados do transporte, preservando type
+   safety, acessibilidade e estados de UI exigidos.
+6. Use testes unitários para lógica isolada e integração para colaboração entre
+   componentes, hooks, estado e data access. Encaminhe jornadas completas no
+   browser para `quality-assurance`.
+7. Execute `npm run build` e `npm run lint` em `apps/frontend`, aplique os
+   checklists relevantes e confira cada critério de aceite e falha aplicável.
 
 ## Reference Loading Rules
 
-[HARD RULE] Não leia todas as referências por padrão.
-
-[HARD RULE] Não use `README.md` como router intermediário. Os arquivos necessários estão ligados diretamente neste `SKILL.md`.
-
-[DEFAULT] Carregue a menor quantidade de referências capaz de orientar corretamente a tarefa.
-
-Uma tarefa pode exigir mais de um domínio. Nesse caso, carregue somente os arquivos diretamente envolvidos de cada domínio.
-
-Referências relacionadas dentro de um arquivo não devem ser carregadas automaticamente. Siga uma referência adicional somente quando a tarefa realmente exigir aquela responsabilidade.
+Não leia todas as referências nem use `README.md` como router intermediário.
+Carregue somente os arquivos diretamente envolvidos; links relacionados dentro
+de uma referência não devem ser seguidos automaticamente.
 
 ### Review Strategy
 
-[DEFAULT] Em tarefas de revisão, comece pelo `review-checklist.md` do domínio relevante.
-
-Se o checklist identificar um problema, consulte somente a referência detalhada relacionada ao item.
-
-[HARD RULE] Não carregue todas as referências detalhadas apenas para executar uma revisão geral.
+Comece pelo `review-checklist.md` do domínio relevante e consulte uma referência
+detalhada somente quando um item concreto exigir esclarecimento.
 
 ---
 
@@ -365,27 +344,14 @@ Classifique o teste pelo boundary definido na spec:
 
 ## Project Rules
 
-[HARD RULE] Preserve type safety.
-
-- Evite `any` quando existir alternativa segura.
-- Respeite a configuração TypeScript existente.
-- Reutilize tipos existentes antes de criar novos.
-- Não duplique contratos provenientes da API sem necessidade.
-- Preserve os padrões existentes do frontend.
-- Reutilize componentes existentes antes de criar novos.
-- Mantenha regras de domínio fora de componentes quando a arquitetura já define um boundary apropriado.
-- Mantenha componentes desacoplados de detalhes HTTP quando o data-access existente fornece essa separação.
-- Adicione ou atualize testes quando o comportamento protegido for alterado.
+- Preserve type safety e a configuração TypeScript existente; evite `any` quando
+  houver alternativa segura.
+- Reutilize tipos e componentes compatíveis e não duplique contratos da API sem
+  necessidade.
+- Mantenha regras de domínio e detalhes HTTP em seus boundaries arquiteturais.
+- Referências não autorizam dependências, ferramentas ou padrões novos.
 
 ## Finalization
 
-Antes de concluir:
-
-1. confira cada critério de aceite frontend contra a implementação e os testes;
-2. registre qualquer critério não coberto ou não verificável e não conclua até a spec definir um resultado observável;
-3. execute o typecheck configurado no projeto;
-4. execute os testes relacionados à mudança;
-5. execute o lint configurado no projeto;
-6. corrija falhas encontradas e repita as validações afetadas.
-
-[HARD RULE] Não invente comandos ou ferramentas. Use os scripts e configurações existentes no projeto.
+Siga os critérios de conclusão e comandos definidos em `AGENTS.md`; relacione os
+testes e resultados a cada critério frontend aplicável.

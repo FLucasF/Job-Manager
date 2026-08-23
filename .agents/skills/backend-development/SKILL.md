@@ -1,107 +1,40 @@
 ---
 name: backend-development
-description: Implements, modifies, fixes, refactors, and reviews Java and Spring Boot backends only from an applicable spec in specs/. Use for backend architecture, Spring MVC and REST contracts, JPA and transactions, security, observability, and backend unit or integration tests. Do not use for frontend work or complete E2E/browser journeys.
+description: Implements, modifies, fixes, refactors, and reviews Java and Spring Boot backends only from an applicable Ready package in specs/. Use for backend architecture, Spring MVC and REST contracts, JPA and transactions, security, observability, and backend unit or integration tests. Do not use for frontend work or complete E2E/browser journeys.
 ---
 
 # Backend Development
 
-Use this skill for implementation, modification, correction, refactoring, and
-review of Java + Spring Boot backend code.
+Use this skill for Java and Spring Boot backend work. `AGENTS.md` governs the
+spec gate, RPI workflow, architecture authority, security, validation, and
+completion.
 
-## Working Principles
+Research must consume the applicable `spec.md`, `design.md` and `tasks.md` plus
+any applicable formal contract. The task-local Plan may refine operational
+steps only; it cannot redefine the package. After implementation, independent
+verification records evidence in `validation.md`.
 
-- Treat the versioned spec in `specs/` as the official source of requirements,
-  expected behavior, acceptance criteria, and scope.
-- Use existing code and tests only to understand integration points and preserve
-  compatibility that does not contradict the spec.
-- Read only the references relevant to the current task.
-- Do not read all references by default.
-- Follow existing dependency versions and project tooling.
-- Do not introduce a library, framework, architectural pattern, or abstraction
-  solely because it appears in a reference.
-- Prefer the simplest implementation that preserves the required boundaries,
-  correctness, security, and maintainability.
-- Keep framework, HTTP, persistence, and infrastructure concerns at their
-  intended boundaries.
-- When a task crosses multiple concerns, read only the references needed for
-  those concerns.
+## Domain Workflow
 
-Apply this precedence:
+1. From completed Research against the Ready package, identify the backend acceptance criteria and the
+   affected web, application/domain, persistence, security, observability, and
+   test boundaries.
+2. Inspect only the affected backend code, configuration, contracts, migrations,
+   and tests.
+3. Load the smallest reference set for the concrete technical concerns below.
+4. Keep domain/application behavior independent of HTTP, persistence, and
+   infrastructure details; adapt those concerns at their intended boundaries.
+5. Treat API and database changes as compatibility-sensitive and synchronize
+   contracts and versioned migrations when required.
+6. Add unit tests for isolated Java/domain behavior and integration tests for
+   Spring, HTTP, persistence, security, or infrastructure collaboration. Route
+   complete browser journeys to `quality-assurance`.
+7. Run `apps/backend/mvnw.cmd test`, then map results to every applicable backend
+   acceptance criterion and relevant failure path.
 
-1. system constraints and critical security requirements;
-2. the current spec in `specs/`;
-3. existing code and tests as technical context only;
-4. this skill's references;
-5. generic framework conventions;
-6. the user's informal request when it does not contradict the spec.
-
-## Workflow
-
-### Implementation or Change
-
-1. Identify the requested capability, feature, or bug and locate its spec in
-   `specs/` by the supplied path, name, or identifier.
-2. Read the complete spec before deciding entities, endpoints, HTTP contracts,
-   persistence, or tests.
-3. Extract its objective, scope, expected behavior, acceptance criteria,
-   business rules, states and failures, technical constraints, HTTP contracts,
-   security rules, persistence effects, and frontend/backend/E2E impacts.
-4. Inspect the affected implementation and tests only after reading the spec.
-5. Compare the current behavior with every applicable requirement and identify
-   the affected boundaries.
-6. Load only the references required for those boundaries.
-7. Implement only what the spec requires. Do not add endpoints, fields, states,
-   tables, or rules that are absent from it.
-8. Treat database and API changes as contract impacts and preserve compatible
-   behavior only when it does not contradict the spec.
-9. Create or update backend unit and integration tests for the relevant
-   acceptance criteria. Route complete browser journeys to
-   `quality-assurance`.
-10. Run the configured validations and check every acceptance criterion again
-    before concluding.
-
-### Spec Gate
-
-- If no valid spec exists, do not change code or tests, create provisional
-  behavior, infer requirements from the request, or substitute current code for
-  the spec. Report the block and request the spec path, identifier, or content.
-- Allow a task without a spec only when it is explicitly limited to documentary
-  diagnosis or current-state analysis; do not implement corrections.
-- If the spec omits a decision that changes implementation, list the missing
-  information and affected code, contracts, persistence, and tests. Wait for a
-  clarification or updated spec before editing.
-- If multiple specs may apply, list them and request the correct identifier. Do
-  not choose by filename similarity.
-- If the informal request contradicts the spec, report the conflict and request
-  a spec update. Do not implement the conflicting behavior.
-- If the requested behavior must change, update the spec first and implement
-  only after the new version is available.
-
-### Refactoring or Architecture Change
-
-1. Locate and read the governing spec, including any specified compatibility
-   constraints.
-2. Inspect current dependency direction and feature ownership.
-3. Read the relevant architecture references before moving responsibilities or
-   packages.
-4. Read framework/persistence/security references only if those boundaries are
-   affected.
-5. Preserve specified behavior while improving the intended boundary.
-6. Use the applicable review checklist after the change and recheck the spec.
-
-### Review
-
-1. Locate and read the complete applicable spec.
-2. Identify the affected concerns and begin with their linked review
-   checklists.
-3. Check the code against every applicable spec requirement.
-4. Read only the detailed references needed for failed or ambiguous checklist
-   items.
-5. Report divergences with evidence from the spec and their impact.
-6. Do not recommend optional patterns unrelated to a specified requirement.
-
-Without an applicable spec, diagnose and report that gap but do not correct the
-code.
+For review, start with the checklist for each affected concern. Open detailed
+references only for concrete questions raised by the checklist; never load the
+whole library.
 
 ## Reference Routing
 
@@ -373,19 +306,7 @@ concerns' review checklists.
 
 ## Final Rules
 
-- References define project guidance; they do not require using every pattern
-  they mention.
-- Preserve existing project conventions only when they do not violate the spec
-  or critical correctness/security constraints.
-- Do not introduce abstraction layers solely to demonstrate Clean Architecture,
-  SOLID, dependency inversion, or design patterns.
-- Do not bypass application boundaries for convenience.
-- Do not expose persistence models automatically as HTTP contracts.
-- Do not treat authentication as authorization.
-- Do not treat masking as encryption or anonymization.
-- Do not optimize persistence or observability without a concrete behavior,
-  workload, or operational reason.
-- Keep changes proportional to the task.
-- Do not conclude while an applicable acceptance criterion is uncovered or
-  unverifiable. Record the gap or request that the spec define an observable
-  result.
+References do not authorize new dependencies, patterns, or abstractions. Do not
+bypass application boundaries, expose persistence models as HTTP contracts,
+confuse authentication with authorization, treat masking as encryption or
+anonymization, or optimize persistence/observability without a concrete reason.

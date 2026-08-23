@@ -1,49 +1,31 @@
 ---
 name: quality-assurance
-description: Planeja, implementa, executa, diagnostica e revisa E2E com Playwright e jornadas completas no browser somente conforme uma spec aplicável em specs/. Use para testes de aceitação ou regressão no browser, configuração e diagnóstico da suíte E2E e investigação de testes browser flaky. Não use para revisão manual sem browser ou testes unitários e de integração de frontend ou backend.
+description: Planeja, implementa, executa, diagnostica e revisa E2E com Playwright e jornadas completas no browser somente conforme um package Ready aplicável em specs/. Use para testes de aceitação ou regressão no browser, configuração e diagnóstico da suíte E2E e investigação de testes browser flaky. Não use para revisão manual sem browser ou testes unitários e de integração de frontend ou backend.
 ---
 
 # Quality Assurance
 
-Atue como QA focado em confiança end-to-end do sistema através de testes automatizados no browser.
+Use esta skill para confiança end-to-end por jornadas automatizadas no browser.
+Unit e integration tests pertencem às skills dos respectivos boundaries.
+`AGENTS.md` governa o gate de specs, RPI, segurança e conclusão.
 
-[HARD RULE] Esta skill é responsável por E2E. Unit e integration tests devem seguir as skills/referências responsáveis por esses níveis.
+Research consome `spec.md`, `design.md` e `tasks.md` do package Ready. A
+verificação independente registra task completion, evidência de critérios,
+comandos realmente executados, findings/deviations e verdict em
+`validation.md`; evidência ausente é GAP, não PASS.
 
 ## Workflow
 
-1. Identifique a capability, feature ou bug e localize a spec correspondente em `specs/` pelo caminho, nome ou identificador informado.
-2. Leia a spec completa antes de criar ou alterar testes.
-3. Extraia objetivo, escopo, comportamento esperado, critérios de aceite, regras de negócio, estados e falhas, restrições técnicas e impactos em frontend, backend e E2E.
-4. Identifique quais critérios de aceite exigem browser e transforme-os em jornadas observáveis.
-5. Distinga as precondições de setup das interações browser que a jornada valida.
-6. Verifique a infraestrutura E2E e inspecione a implementação e a suíte existentes.
-7. Identifique os boundaries afetados e carregue somente as references necessárias.
-8. Prepare dados isolados conforme as regras da spec.
-9. Implemente somente jornadas justificadas por critérios de aceite.
-10. Execute os cenários relacionados usando comandos existentes.
-11. Em falhas, preserve traces, screenshots e relatórios disponíveis e diagnostique antes de alterar retry, timeout ou expectativa.
-12. Confira cada jornada contra seu critério de aceite antes de concluir.
-
-## Spec Gate
-
-[HARD RULE] Trate `specs/` como a fonte oficial de requisitos, comportamento, critérios de aceite e escopo. Não invente um formato de spec; trabalhe com o formato versionado existente.
-
-Siga esta precedência:
-
-1. restrições do sistema e requisitos críticos de segurança;
-2. spec vigente em `specs/`;
-3. código e testes existentes, somente como contexto técnico;
-4. references desta skill;
-5. convenções genéricas da ferramenta;
-6. pedido informal do usuário, quando não contradizer a spec.
-
-[HARD RULE] Sem spec válida, não altere código nem testes, não crie jornada provisória e não infira requisitos do pedido ou do comportamento atual. Informe o bloqueio e solicite o caminho, identificador ou conteúdo da spec. Permita somente diagnóstico documental ou análise do estado atual, sem implementar correções.
-
-[HARD RULE] Se a spec omitir uma decisão que altere a jornada, liste a informação ausente e os cenários, dados ou assertions afetados e aguarde esclarecimento ou atualização da spec.
-
-[HARD RULE] Se houver mais de uma spec candidata, liste-as e solicite o identificador correto; não escolha apenas pela proximidade do nome.
-
-[HARD RULE] Se o pedido contradizer a spec, informe o conflito e solicite a atualização da spec. Não implemente o pedido informal enquanto a spec vigente não o autorizar.
+1. A partir da Research concluída, selecione somente critérios de aceite que
+   exigem jornada completa no browser e defina outcomes observáveis.
+2. Separe precondições de setup das interações que a jornada deve validar.
+3. Confirme a infraestrutura E2E, inspecione somente a suíte e boundaries
+   relacionados e carregue a menor combinação de referências.
+4. Prepare dados isolados e implemente apenas jornadas justificadas pela spec.
+5. Execute comandos existentes. Em falhas, preserve traces, screenshots, vídeos
+   e relatórios, classifique a causa e só então altere o boundary responsável.
+6. Relacione cada cenário ao critério de aceite e confirme que o setup não
+   bypassa a capability, com isolamento, determinismo e cobertura adequados.
 
 ## Infrastructure Gate
 
@@ -58,7 +40,9 @@ Antes de usar Playwright, confirme:
 - estratégia de autenticação;
 - browsers e workers configurados.
 
-[HARD RULE] Se a infraestrutura necessária não existir, não invente comandos, URLs, portas, credenciais ou serviços e não instale dependências automaticamente. Bloqueie a implementação E2E e informe exatamente qual pré-requisito exigido pela spec não está disponível.
+Se a infraestrutura necessária não existir, informe o pré-requisito exato. Não
+invente comandos, URLs, portas, credenciais ou serviços, nem instale dependências
+automaticamente.
 
 ## QA Principles
 
@@ -223,15 +207,7 @@ Use as references de acessibilidade, segurança e performance de `frontend-devel
 
 ## Finalization
 
-Antes de concluir:
-
-1. relacione cada scenario ao critério de aceite que ele protege;
-2. confirme que setup não bypassa a capability sob teste;
-3. confirme independência e isolamento de dados;
-4. execute o test/scenario relacionado;
-5. investigue qualquer retry/flakiness em vez de mascará-lo;
-6. execute a suíte relacionada quando a mudança puder afetar outros journeys;
-7. preserve artifacts úteis quando houver falha;
-8. não conclua com critério browser não coberto ou não verificável; registre a lacuna ou solicite que a spec defina um resultado observável.
-
-[HARD RULE] Não invente comandos, portas, URLs, credentials, services ou scripts. Use a configuração e os comandos existentes no repositório.
+Siga os critérios de conclusão de `AGENTS.md`. Confirme a ligação entre cenário
+e critério de aceite, independência e isolamento dos dados, execução da cobertura
+relacionada e preservação de artefatos úteis. Investigue flakiness em vez de
+mascará-la.
