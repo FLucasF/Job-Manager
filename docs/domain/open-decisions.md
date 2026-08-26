@@ -1,7 +1,8 @@
 # Open Domain Decisions
 
 Every entry is non-normative while `Status: Open`. Product decisions require
-human authority and must be resolved before a dependent spec reaches Ready.
+human authority and must be resolved before a dependent spec reaches Ready or
+before directly authorized dependent implementation begins.
 
 ## DOMAIN-OPEN-001 — CPF mutability and uniqueness
 

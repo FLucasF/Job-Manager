@@ -14,7 +14,7 @@ cannot use Draft/Open architecture content as normative authority.
 - `docs/architecture/` owns durable project-wide architectural constraints;
 - `docs/domain/` owns durable domain knowledge according to document status;
 - `contracts/` owns formal shared external representations when applicable;
-- `.agents/skills/**/references/` provides reusable guidance only;
+- `.claude/skills/**/references/` provides reusable guidance only;
 - `apps/**` is implementation context, not a requirement source.
 
 ## System boundary

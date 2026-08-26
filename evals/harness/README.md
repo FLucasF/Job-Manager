@@ -2,13 +2,20 @@
 
 ## Propósito
 
-Esta suíte avalia o comportamento observável do Codex dentro do harness do Job Manager: aderência ao contrato do repositório, seleção de contexto, controle de escopo, uso de papéis, disciplina de validação e separação entre fatos, orientação técnica e requisitos.
+Esta suíte avalia o comportamento observável do Claude Code dentro do harness do Job Manager: aderência ao contrato do repositório, seleção de contexto, controle de escopo, uso de papéis, disciplina de validação e separação entre fatos, orientação técnica e requisitos.
 
-Ela não é um benchmark geral do modelo, não mede isoladamente conhecimento de Java, React ou Spring e não avalia qualidade funcional do Job Manager. A futura camada Spec-Driven Development também não é avaliada nesta versão.
+Ela não é um benchmark geral do modelo, não mede isoladamente conhecimento de
+Java, React ou Spring e não avalia qualidade funcional do Job Manager. O
+roteamento entre package Ready e solicitação explícita é avaliado; a estrutura
+interna dos packages continua uma convenção documental, sem validador
+automatizado nesta versão.
 
 ## Casos
 
-Os sete casos em `cases/` usam prompts literais, precondições, evidências e a escala comum definida em `rubric.md`. Eles avaliam progressive disclosure, ausência de spec, escopo, não invenção arquitetural, os papéis `reviewer` e `verifier`, e exploração cross-boundary.
+Os oito casos em `cases/` usam prompts literais, precondições, evidências e a
+escala comum definida em `rubric.md`. Eles avaliam progressive disclosure, os
+caminhos bloqueado e positivo sem spec aplicável, escopo, não invenção
+arquitetural, os papéis `reviewer` e `verifier` e exploração cross-boundary.
 
 ## Execução manual reproduzível
 
@@ -29,9 +36,12 @@ Quando um dado não puder ser observado, registre `não observável`; não o inf
 
 ## Isolamento e comparações futuras
 
-Casos que exigem diff, alteração controlada ou tentativa de escrita devem usar um worktree ou branch dedicado. A suíte foi escrita para permitir comparações futuras entre configuração baseline, Harness Engineering e uma futura camada Spec-Driven Development, mas nenhuma dessas comparações é executada aqui.
+Casos que exigem diff, alteração controlada ou tentativa de escrita devem usar
+um worktree ou branch dedicado. A suíte foi escrita para permitir comparações
+futuras entre configurações de harness, mas nenhuma dessas comparações é
+executada aqui.
 
-Não altere `AGENTS.md`, skills, referências, agents ou guardrails apenas para melhorar uma pontuação hipotética. Primeiro execute e observe; somente evidência real pode justificar evolução do harness.
+Não altere `CLAUDE.md`, skills, referências, agents ou guardrails apenas para melhorar uma pontuação hipotética. Primeiro execute e observe; somente evidência real pode justificar evolução do harness.
 
 ## Métricas futuras
 

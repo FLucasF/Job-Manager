@@ -7,15 +7,17 @@
 This document defines project-wide security constraints that apply regardless
 of the eventual authentication technology.
 
-Capability-specific security behavior belongs in the applicable specification.
-Detailed implementation guidance belongs in security references.
+Capability-specific security behavior belongs in the applicable Ready
+specification or explicit user request. Detailed implementation guidance belongs
+in security references.
 
 ## Current security status
 
 Authentication mechanism, project-wide authorization model and browser session
 strategy remain in [Open Architecture Decisions](open-decisions.md). References
 to JWT, sessions or OAuth/OIDC do not authorize adoption. A dependent feature
-must resolve the applicable decisions before Ready.
+must resolve the applicable decisions before Ready or before directly authorized
+implementation begins.
 
 ## Authentication and authorization
 
@@ -137,8 +139,8 @@ which lifecycle matters.
 
 ## Security change policy
 
-A feature spec may define capability-specific security behavior, such as who can
-perform an action or which data may be disclosed.
+A feature spec or explicit user request may define capability-specific security
+behavior, such as who can perform an action or which data may be disclosed.
 
 If satisfying that behavior requires a project-wide security mechanism not yet
 accepted, Research must stop before Plan until the architecture is explicitly
@@ -148,18 +150,18 @@ updated.
 
 Backend security guidance includes:
 
-- [authentication](../../.agents/skills/backend-development/references/security/authentication.md)
-- [authorization](../../.agents/skills/backend-development/references/security/authorization.md)
-- [JWT](../../.agents/skills/backend-development/references/security/jwt.md)
-- [password security](../../.agents/skills/backend-development/references/security/password-security.md)
-- [data protection](../../.agents/skills/backend-development/references/security/data-protection.md)
-- [response obfuscation](../../.agents/skills/backend-development/references/security/response-obfuscation.md)
-- [encryption](../../.agents/skills/backend-development/references/security/encryption.md)
-- [secrets](../../.agents/skills/backend-development/references/security/secrets.md)
-- [CORS and CSRF](../../.agents/skills/backend-development/references/security/cors-csrf.md)
+- [authentication](../../.claude/skills/backend-development/references/security/authentication.md)
+- [authorization](../../.claude/skills/backend-development/references/security/authorization.md)
+- [JWT](../../.claude/skills/backend-development/references/security/jwt.md)
+- [password security](../../.claude/skills/backend-development/references/security/password-security.md)
+- [data protection](../../.claude/skills/backend-development/references/security/data-protection.md)
+- [response obfuscation](../../.claude/skills/backend-development/references/security/response-obfuscation.md)
+- [encryption](../../.claude/skills/backend-development/references/security/encryption.md)
+- [secrets](../../.claude/skills/backend-development/references/security/secrets.md)
+- [CORS and CSRF](../../.claude/skills/backend-development/references/security/cors-csrf.md)
 
 Frontend security guidance lives under:
 
-- `../../.agents/skills/frontend-development/references/security/`
+- `../../.claude/skills/frontend-development/references/security/`
 
 Load only security references relevant to the capability and accepted mechanism.

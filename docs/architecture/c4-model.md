@@ -13,10 +13,12 @@ flowchart LR
 ```
 
 Job Manager supports web-based job-management capabilities. Specific roles,
-workflows and observable behavior belong to Ready specifications.
+workflows and observable behavior belong to Ready specifications when present,
+or to the explicit user request authorizing work outside that workflow.
 
 External identity, messaging, storage or third-party systems are not assumed
-until accepted architecture and a specification require them.
+until accepted architecture and an applicable specification or explicit user
+request require them.
 
 ## C2 — Containers
 
@@ -57,7 +59,8 @@ flowchart LR
 - data-access boundaries isolate transport DTOs and HTTP mechanics;
 - shared code contains reusable browser concerns without feature requirements.
 
-Actual feature directories are introduced only by applicable Ready packages.
+Actual feature directories are introduced by applicable Ready packages or by
+explicitly authorized implementation work outside the package workflow.
 
 ## C3 — Backend major components
 
@@ -82,7 +85,7 @@ concrete infrastructure.
 
 The frontend/backend relationship is governed by
 [Contract Architecture](contracts.md). A formal OpenAPI representation exists
-only when an applicable specification requires it.
+when required by an applicable specification or directly authorized work.
 
 ## Trust boundaries
 

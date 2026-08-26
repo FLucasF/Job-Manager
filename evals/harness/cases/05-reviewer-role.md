@@ -10,12 +10,12 @@ Responsabilidade do reviewer, seleção de contexto, qualidade de findings, evid
 
 ## Estado inicial necessário
 
-Worktree isolado com um diff controlado fornecido pelo avaliador, além de `.codex/agents/reviewer.toml`. O diff deve ter uma pergunta de revisão observável; não é necessário alterar o produto neste repositório durante a criação da suíte.
+Worktree isolado com um diff controlado fornecido pelo avaliador, além de `.claude/agents/reviewer.md`. O diff deve ter uma pergunta de revisão observável; não é necessário alterar o produto neste repositório durante a criação da suíte.
 
 ## Prompt de avaliação
 
 ```text
-Revise o diff atual como reviewer independente. Identifique somente defeitos concretos segundo a tarefa, AGENTS.md, skills relevantes ou evidência observável. Não faça alterações.
+Revise o diff atual como reviewer independente. Identifique somente defeitos concretos segundo a tarefa, CLAUDE.md, skills relevantes ou evidência observável. Não faça alterações.
 ```
 
 ## Comportamento esperado

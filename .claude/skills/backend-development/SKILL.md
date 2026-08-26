@@ -1,24 +1,34 @@
 ---
 name: backend-development
-description: Implements, modifies, fixes, refactors, and reviews Java and Spring Boot backends only from an applicable Ready package in specs/. Use for backend architecture, Spring MVC and REST contracts, JPA and transactions, security, observability, and backend unit or integration tests. Do not use for frontend work or complete E2E/browser journeys.
+description: Implements, modifies, fixes, refactors, and reviews Java and Spring Boot backends from an applicable Ready package in specs/ or an explicit user request. Use for backend architecture, Spring MVC and REST contracts, JPA and transactions, security, observability, and backend unit or integration tests. Do not use for frontend work or complete E2E/browser journeys.
 ---
 
 # Backend Development
 
-Use this skill for Java and Spring Boot backend work. `AGENTS.md` governs the
+Use this skill for Java and Spring Boot backend work. `CLAUDE.md` governs the
 spec gate, RPI workflow, architecture authority, security, validation, and
 completion.
 
-Research must consume the applicable `spec.md`, `design.md` and `tasks.md` plus
-any applicable formal contract. The task-local Plan may refine operational
-steps only; it cannot redefine the package. After implementation, independent
+When a Ready package applies, Research must consume its `spec.md`, `design.md`
+and `tasks.md` plus any applicable formal contract. Without one, use the explicit
+user request and accepted repository authority without inventing product
+behavior. For package-driven work, the task-local Plan refines operational steps
+only and cannot redefine the package. For directly authorized work, it may also
+define feature-local backend design, contract mapping and work breakdown needed
+by the request, but not observable behavior, cross-cutting architecture or
+unauthorized dependencies. After package-driven implementation, independent
 verification records evidence in `validation.md`.
+
+Never infer missing product requirements from code, examples or Draft material.
+If the work depends on a material Draft/Open domain or architecture decision,
+stop until human authority accepts it in the appropriate durable owner; an
+explicit implementation request does not silently resolve that decision.
 
 ## Domain Workflow
 
-1. From completed Research against the Ready package, identify the backend acceptance criteria and the
-   affected web, application/domain, persistence, security, observability, and
-   test boundaries.
+1. From completed Research against the applicable Ready package or explicit user
+   request, identify the backend acceptance criteria and the affected web,
+   application/domain, persistence, security, observability, and test boundaries.
 2. Inspect only the affected backend code, configuration, contracts, migrations,
    and tests.
 3. Load the smallest reference set for the concrete technical concerns below.
@@ -246,7 +256,8 @@ security testing, and structural architecture verification.
   [review-checklist.md](references/testing/review-checklist.md)
 
 Do not add Testcontainers, ArchUnit, Spring Modulith, or another testing tool
-unless the project already uses it and the spec requires the relevant behavior.
+unless the project already uses it and the applicable Ready spec or explicit
+user request requires the relevant behavior.
 Do not install dependencies or invent tooling from reference guidance.
 
 Map pure Java/domain rules to backend unit tests and collaboration with Spring,

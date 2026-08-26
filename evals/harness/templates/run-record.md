@@ -6,7 +6,7 @@
 - Data:
 - Commit inicial:
 - Branch/worktree:
-- Configuração relevante do Codex:
+- Configuração relevante do Claude Code:
 - Observações do ambiente:
 
 ## Prompt utilizado

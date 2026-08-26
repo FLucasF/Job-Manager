@@ -10,7 +10,11 @@ make every document normative; each boundary declares its own status/authority.
 - [Domain Documentation](domain/README.md) — domain router;
 - [Product Backlog](product/frontend-user-stories.md) — non-normative discovery;
 - [Development Methodology](methodology/development-methodology.md) — local
-  specification and delivery process.
+  specification and delivery process;
+- [Job Manager Harness](methodology/job-manager-harness.md) — operational
+  overview of the harness;
+- [Harness Migration](methodology/harness-migration-codex-to-claude.md) — record
+  of the Codex to Claude Code migration and its known divergences.
 
 Load only documents relevant to the current task.
 
@@ -26,7 +30,7 @@ specs/
 contracts/
 → formal shared external contracts when applicable
 
-.agents/skills/**/references/
+.claude/skills/**/references/
 → reusable technical guidance
 
 apps/

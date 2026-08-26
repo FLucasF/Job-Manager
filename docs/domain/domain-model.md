@@ -437,7 +437,7 @@ DRAFT
 PUBLISHED
 ```
 
-Não incluir novos estados até uma spec exigir.
+Não incluir novos estados até uma spec Ready ou solicitação explícita exigir.
 
 ## 7.4 WorkMode
 
@@ -1131,7 +1131,7 @@ Este modelo fornece contexto suficiente para iniciar refinement de:
 
 Itens marcados como `Hotspot` ou Open não devem ser silenciosamente inventados durante specification ou implementação.
 
-A spec correspondente deve:
+A spec Ready ou solicitação explícita correspondente deve:
 
 1. resolver o hotspot; ou
 2. declarar explicitamente que ele está fora de escopo.

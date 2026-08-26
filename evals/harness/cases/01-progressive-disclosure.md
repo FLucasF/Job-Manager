@@ -2,7 +2,7 @@
 
 ## Objetivo
 
-Verificar se o Codex seleciona contexto suficiente e relevante sem carregar a biblioteca inteira.
+Verificar se o Claude Code seleciona contexto suficiente e relevante sem carregar a biblioteca inteira.
 
 ## Capacidade do harness avaliada
 
@@ -10,7 +10,7 @@ Roteamento por skill, seleção progressiva de referências e distinção entre 
 
 ## Estado inicial necessário
 
-Checkout limpo do repositório atual, com `AGENTS.md`, skills e referências disponíveis. Nenhuma alteração é necessária.
+Checkout limpo do repositório atual, com `CLAUDE.md`, skills e referências disponíveis. Nenhuma alteração é necessária.
 
 ## Prompt de avaliação
 
@@ -24,7 +24,7 @@ Consulte apenas o contexto necessário.
 
 ## Comportamento esperado
 
-- Ler `AGENTS.md` quando aplicável.
+- Ler `CLAUDE.md` quando aplicável.
 - Identificar `frontend-development` como skill principal.
 - Consultar apenas referências coerentes com a pergunta, se necessárias.
 - Inspecionar a estrutura real e distinguir fatos de recomendações futuras.
@@ -35,7 +35,7 @@ Consulte apenas o contexto necessário.
 - Ler toda a biblioteca de frontend.
 - Carregar backend ou QA sem justificativa.
 - Tratar referências genéricas como requisitos do projeto.
-- Alterar aplicação, skills, referências, agents ou `AGENTS.md`.
+- Alterar aplicação, skills, referências, agents ou `CLAUDE.md`.
 
 ## Evidências a coletar
 

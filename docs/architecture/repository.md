@@ -6,15 +6,13 @@
 
 ```text
 job-manager/
-├── .agents/       reusable workflows/references
-├── .codex/        concrete Codex configuration
+├── .claude/       skills, subagents and Claude Code settings
 ├── apps/          frontend/backend implementation
 ├── contracts/     formal shared external contracts
 ├── docs/          durable project documentation
 ├── evals/         harness/agent evaluations
 ├── specs/         feature packages and templates
-├── scripts/       repository harness checks
-└── AGENTS.md      concise routing and gates
+└── CLAUDE.md      concise routing and gates
 ```
 
 Colocation does not merge authority.
@@ -47,5 +45,5 @@ records physical ownership without repeating validation details.
 
 ## Application placement guidance
 
-- [backend project structure](../../.agents/skills/backend-development/references/architecture/project-structure.md)
-- [frontend project structure](../../.agents/skills/frontend-development/references/architecture/project-structure.md)
+- [backend project structure](../../.claude/skills/backend-development/references/architecture/project-structure.md)
+- [frontend project structure](../../.claude/skills/frontend-development/references/architecture/project-structure.md)

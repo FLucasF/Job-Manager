@@ -1,22 +1,35 @@
 ---
 name: frontend-development
-description: Implementa, altera, corrige e revisa frontend React com TypeScript somente conforme um package Ready aplicável em specs/. Use para arquitetura frontend, componentes, hooks, formulários, estados de UI, acessibilidade, segurança do browser, performance, Tailwind, React Router e testes unitários ou de integração frontend. Não use para jornadas E2E completas no browser; encaminhe-as para quality-assurance.
+description: Implementa, altera, corrige e revisa frontend React com TypeScript conforme um package Ready aplicável em specs/ ou uma solicitação explícita do usuário. Use para arquitetura frontend, componentes, hooks, formulários, estados de UI, acessibilidade, segurança do browser, performance, Tailwind, React Router e testes unitários ou de integração frontend. Não use para jornadas E2E completas no browser; encaminhe-as para quality-assurance.
 ---
 
 # Frontend Development
 
 Use esta skill para mudanças e revisões no boundary React/TypeScript.
-`AGENTS.md` governa o gate de specs, RPI, arquitetura, segurança, validação e
+`CLAUDE.md` governa o gate de specs, RPI, arquitetura, segurança, validação e
 conclusão.
 
-Research deve consumir `spec.md`, `design.md` e `tasks.md` do package Ready,
-além do contrato aplicável. O Plan local da task não redefine esses artefatos.
-Após a implementação, a evidência pertence à validation independente em
+Quando existir package Ready aplicável, Research deve consumir `spec.md`,
+`design.md` e `tasks.md`, além do contrato aplicável. Sem ele, use a solicitação
+explícita do usuário e as autoridades aceitas do repositório sem inventar
+comportamento de produto. No caminho dirigido por package, o Plan local refina
+apenas passos operacionais e não redefine os artefatos. No caminho diretamente
+autorizado, ele também pode definir design frontend local, mapeamento contratual
+e divisão do trabalho necessários ao pedido, mas não comportamento observável,
+arquitetura transversal ou dependências sem autoridade. Após implementação
+dirigida por package, a evidência pertence à validation independente em
 `validation.md`.
+
+Não infira requisitos de produto ausentes a partir de código, exemplos ou
+material Draft. Se o trabalho depender de decisão material de domínio ou
+arquitetura `Draft/Open`, pare até que autoridade humana a aceite no owner
+durável apropriado; a solicitação de implementação não resolve essa decisão
+silenciosamente.
 
 ## Workflow
 
-1. A partir da Research concluída contra o package Ready, mapeie critérios de aceite frontend para
+1. A partir da Research concluída contra o package Ready aplicável ou a
+   solicitação explícita do usuário, mapeie critérios de aceite frontend para
    estados e comportamentos observáveis.
 2. Inspecione somente implementação, testes, `package.json`, TypeScript, Vite e
    configurações dos boundaries afetados.
@@ -312,13 +325,13 @@ Use estas referências para unit e integration testing do frontend.
 
 [HARD RULE] Fluxos E2E completos pertencem à skill `quality-assurance`.
 
-Classifique o teste pelo boundary definido na spec:
+Classifique o teste pelo boundary definido na autoridade aplicável:
 
 - lógica pura e regras isoladas → unit test frontend;
 - colaboração entre componentes, hooks, estado e data-access → integration test frontend;
 - fluxo completo atravessando browser e sistema → `quality-assurance`.
 
-[HARD RULE] Relacione cada teste a um comportamento ou critério de aceite da spec. Não crie testes apenas para aumentar cobertura numérica.
+[HARD RULE] Relacione cada teste a um comportamento ou critério de aceite da spec ou solicitação explícita aplicável. Não crie testes apenas para aumentar cobertura numérica.
 
 - Escolha do nível, distribuição de cenários, coverage e regression strategy:
   [test-strategy.md](references/testing/test-strategy.md)
@@ -353,5 +366,5 @@ Classifique o teste pelo boundary definido na spec:
 
 ## Finalization
 
-Siga os critérios de conclusão e comandos definidos em `AGENTS.md`; relacione os
+Siga os critérios de conclusão e comandos definidos em `CLAUDE.md`; relacione os
 testes e resultados a cada critério frontend aplicável.

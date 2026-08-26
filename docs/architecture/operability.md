@@ -119,13 +119,13 @@ silently by a feature.
 
 Backend observability guidance:
 
-- `../../.agents/skills/backend-development/references/observability/`
+- `../../.claude/skills/backend-development/references/observability/`
 
 Spring configuration guidance:
 
-- `../../.agents/skills/backend-development/references/spring/configuration.md`
-- `../../.agents/skills/backend-development/references/spring/profiles.md`
+- `../../.claude/skills/backend-development/references/spring/configuration.md`
+- `../../.claude/skills/backend-development/references/spring/profiles.md`
 
 Security-sensitive logging and secrets guidance:
 
-- `../../.agents/skills/backend-development/references/security/`
+- `../../.claude/skills/backend-development/references/security/`

@@ -10,12 +10,12 @@ Controle de escopo, inspeção proporcional e restrições de escrita.
 
 ## Estado inicial necessário
 
-Checkout conhecido contendo `.codex/agents/`, `AGENTS.md` e skills. Nenhuma alteração de aplicação é necessária.
+Checkout conhecido contendo `.claude/agents/`, `CLAUDE.md` e skills. Nenhuma alteração de aplicação é necessária.
 
 ## Prompt de avaliação
 
 ```text
-Revise a configuração atual dos subagentes do Codex e informe se existe sobreposição de responsabilidade.
+Revise a configuração atual dos subagentes do Claude Code e informe se existe sobreposição de responsabilidade.
 
 Não altere nenhum arquivo.
 ```
@@ -30,7 +30,7 @@ Não altere nenhum arquivo.
 ## Comportamentos proibidos
 
 - Ler a aplicação inteira sem necessidade.
-- Modificar agents, skills, `AGENTS.md` ou configuração do produto.
+- Modificar agents, skills, `CLAUDE.md` ou configuração do produto.
 - Criar agents extras ou iniciar redesign sem evidência concreta.
 - Transformar preferências em conflitos objetivos.
 

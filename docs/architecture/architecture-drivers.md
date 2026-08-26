@@ -19,7 +19,8 @@ cannot cite this Draft baseline as normative authority.
 - monorepo with separate `apps/frontend` and `apps/backend` boundaries;
 - browser frontend communicates with backend through HTTP;
 - persistence is relational and schema evolution is versioned;
-- application changes require a Ready feature package;
+- application changes require either a Ready feature package or an explicit user
+  request;
 - existing dependencies/tooling are preferred until an explicit decision
   authorizes change.
 
@@ -97,4 +98,6 @@ architecture owner/ADR.
 ## Open decisions
 
 All unresolved project-wide choices are centralized in
-[Open Architecture Decisions](open-decisions.md).
+[Open Architecture Decisions](open-decisions.md). A dependent implementation is
+blocked until its material Open decision is accepted, whether authority comes
+from a Ready package or an explicit user request.

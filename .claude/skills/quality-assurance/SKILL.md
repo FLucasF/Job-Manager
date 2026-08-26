@@ -1,18 +1,31 @@
 ---
 name: quality-assurance
-description: Planeja, implementa, executa, diagnostica e revisa E2E com Playwright e jornadas completas no browser somente conforme um package Ready aplicável em specs/. Use para testes de aceitação ou regressão no browser, configuração e diagnóstico da suíte E2E e investigação de testes browser flaky. Não use para revisão manual sem browser ou testes unitários e de integração de frontend ou backend.
+description: Planeja, implementa, executa, diagnostica e revisa E2E com Playwright e jornadas completas no browser conforme um package Ready aplicável em specs/ ou uma solicitação explícita do usuário. Use para testes de aceitação ou regressão no browser, configuração e diagnóstico da suíte E2E e investigação de testes browser flaky. Não use para revisão manual sem browser ou testes unitários e de integração de frontend ou backend.
 ---
 
 # Quality Assurance
 
 Use esta skill para confiança end-to-end por jornadas automatizadas no browser.
 Unit e integration tests pertencem às skills dos respectivos boundaries.
-`AGENTS.md` governa o gate de specs, RPI, segurança e conclusão.
+`CLAUDE.md` governa o gate de specs, RPI, segurança e conclusão.
 
-Research consome `spec.md`, `design.md` e `tasks.md` do package Ready. A
-verificação independente registra task completion, evidência de critérios,
-comandos realmente executados, findings/deviations e verdict em
-`validation.md`; evidência ausente é GAP, não PASS.
+Quando existir package Ready aplicável, Research consome `spec.md`, `design.md` e
+`tasks.md`. Sem ele, a solicitação explícita do usuário autoriza o trabalho e
+define o escopo observável. Na workflow dirigida por package, a verificação
+independente registra task completion, evidência de critérios, comandos realmente
+executados, findings/deviations e verdict em `validation.md`; evidência ausente é
+GAP, não PASS.
+
+No caminho dirigido por package, o Plan local não redefine a jornada ou os
+critérios já definidos. No caminho diretamente autorizado, ele pode definir
+somente o desenho E2E local e a divisão do trabalho necessários ao pedido; não
+pode criar comportamento observável, arquitetura transversal ou dependências
+sem autoridade.
+
+Não infira comportamento ausente a partir da aplicação, de exemplos ou material
+Draft. Se a jornada depender de decisão material de domínio ou arquitetura
+`Draft/Open`, pare até sua aceitação humana no owner durável apropriado; a
+solicitação de implementação não resolve essa decisão silenciosamente.
 
 ## Workflow
 
@@ -21,7 +34,8 @@ comandos realmente executados, findings/deviations e verdict em
 2. Separe precondições de setup das interações que a jornada deve validar.
 3. Confirme a infraestrutura E2E, inspecione somente a suíte e boundaries
    relacionados e carregue a menor combinação de referências.
-4. Prepare dados isolados e implemente apenas jornadas justificadas pela spec.
+4. Prepare dados isolados e implemente apenas jornadas justificadas pela spec ou
+   solicitação explícita aplicável.
 5. Execute comandos existentes. Em falhas, preserve traces, screenshots, vídeos
    e relatórios, classifique a causa e só então altere o boundary responsável.
 6. Relacione cada cenário ao critério de aceite e confirme que o setup não
@@ -131,7 +145,7 @@ Se um item falhar ou permanecer ambíguo, carregue somente a referência detalha
 
 Preconditions fora do objetivo podem usar APIs/helpers controlados.
 
-[HARD RULE] API, banco ou helper podem preparar apenas o estado inicial quando isso não substituir a interação browser que a spec exige validar.
+[HARD RULE] API, banco ou helper podem preparar apenas o estado inicial quando isso não substituir a interação browser que a autoridade aplicável exige validar.
 
 [HARD RULE] Cenários devem executar independentemente e não depender de ordem.
 
@@ -207,7 +221,7 @@ Use as references de acessibilidade, segurança e performance de `frontend-devel
 
 ## Finalization
 
-Siga os critérios de conclusão de `AGENTS.md`. Confirme a ligação entre cenário
+Siga os critérios de conclusão de `CLAUDE.md`. Confirme a ligação entre cenário
 e critério de aceite, independência e isolamento dos dados, execução da cobertura
 relacionada e preservação de artefatos úteis. Investigue flakiness em vez de
 mascará-la.

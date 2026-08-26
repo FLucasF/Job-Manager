@@ -9,8 +9,10 @@ Verify each acceptance criterion at the smallest effective level.
 
 - backend unit/integration tests belong to `apps/backend/`;
 - frontend unit/integration tests belong to `apps/frontend/`;
-- complete browser journeys belong to the quality-assurance workflow;
-- structural harness/package checks belong to `scripts/check-harness.ps1`.
+- complete browser journeys belong to the quality-assurance workflow.
+
+Specification packages, templates and harness evals are documentary conventions
+reviewed manually. There is no structural harness validator, CI gate or Git hook.
 
 Use backend integration tests when confidence depends on Spring, HTTP,
 persistence, migrations, transactions or security. Use frontend integration
@@ -28,14 +30,15 @@ required. Cover relevant failure, validation, authorization, persistence,
 concurrency and UI-state paths required by the spec. Do not invent unspecified
 failure behavior.
 
+Outside the package workflow, map tests to the explicit user request and record
+the commands and observable evidence proportionally; `design.md`, `tasks.md` and
+`validation.md` are not required.
+
 ## Repository commands
 
 Use commands that actually exist:
 
 ```text
-harness
-→ powershell -File scripts/check-harness.ps1
-
 backend
 → apps/backend/mvnw.cmd test
 
@@ -56,6 +59,6 @@ security controls. Missing evidence is a gap, not a pass.
 
 ## Related guidance
 
-- `../../.agents/skills/backend-development/references/testing/`
-- `../../.agents/skills/frontend-development/references/testing/`
-- `.agents/skills/quality-assurance/` for E2E journeys.
+- `../../.claude/skills/backend-development/references/testing/`
+- `../../.claude/skills/frontend-development/references/testing/`
+- `.claude/skills/quality-assurance/` for E2E journeys.

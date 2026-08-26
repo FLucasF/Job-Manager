@@ -21,3 +21,6 @@ target/
 
 # Logs
 *.log
+
+# Claude Code (local, nao versionado)
+.claude/settings.local.json

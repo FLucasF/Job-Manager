@@ -37,7 +37,7 @@ spring.flyway.enabled = true
 Responsibility split:
 
 ```text
-Specification requires persistence change
+Ready specification or explicit user request requires persistence change
         ↓
 Backend persistence design
         ↓
@@ -59,8 +59,8 @@ Do not use ORM auto-update as a substitute for versioned migrations.
 - Constraints must account for existing data.
 - Data backfills require consideration of execution time, locking, batching,
   recovery, and realistic dataset size when applicable.
-- Destructive schema changes require explicit specification scope and careful
-  review.
+- Destructive schema changes require explicit scope in the applicable Ready
+  specification or user request and careful review.
 
 ## JPA boundary
 
@@ -161,13 +161,13 @@ For each schema-changing capability, consider:
 
 Load only the relevant persistence topic, for example:
 
-- [entities](../../.agents/skills/backend-development/references/persistence/entities.md)
-- [schema design](../../.agents/skills/backend-development/references/persistence/schema-design.md)
-- [repositories](../../.agents/skills/backend-development/references/persistence/repositories.md)
-- [relationships](../../.agents/skills/backend-development/references/persistence/relationships.md)
-- [transactions](../../.agents/skills/backend-development/references/persistence/transactions.md)
-- [queries](../../.agents/skills/backend-development/references/persistence/queries.md)
-- [indexing](../../.agents/skills/backend-development/references/persistence/indexing.md)
-- [migrations](../../.agents/skills/backend-development/references/persistence/migrations.md)
+- [entities](../../.claude/skills/backend-development/references/persistence/entities.md)
+- [schema design](../../.claude/skills/backend-development/references/persistence/schema-design.md)
+- [repositories](../../.claude/skills/backend-development/references/persistence/repositories.md)
+- [relationships](../../.claude/skills/backend-development/references/persistence/relationships.md)
+- [transactions](../../.claude/skills/backend-development/references/persistence/transactions.md)
+- [queries](../../.claude/skills/backend-development/references/persistence/queries.md)
+- [indexing](../../.claude/skills/backend-development/references/persistence/indexing.md)
+- [migrations](../../.claude/skills/backend-development/references/persistence/migrations.md)
 
 Do not load every persistence reference for a simple change.

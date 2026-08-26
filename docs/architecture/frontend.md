@@ -246,11 +246,11 @@ are implementation guidance only, not architecture authorization.
 
 ## Related implementation references
 
-- [project structure](../../.agents/skills/frontend-development/references/architecture/project-structure.md)
-- [layered architecture](../../.agents/skills/frontend-development/references/architecture/layered-architecture.md)
-- [state placement](../../.agents/skills/frontend-development/references/architecture/state-placement.md)
-- [data access](../../.agents/skills/frontend-development/references/architecture/data-access.md)
-- [routing](../../.agents/skills/frontend-development/references/architecture/routing.md)
+- [project structure](../../.claude/skills/frontend-development/references/architecture/project-structure.md)
+- [layered architecture](../../.claude/skills/frontend-development/references/architecture/layered-architecture.md)
+- [state placement](../../.claude/skills/frontend-development/references/architecture/state-placement.md)
+- [data access](../../.claude/skills/frontend-development/references/architecture/data-access.md)
+- [routing](../../.claude/skills/frontend-development/references/architecture/routing.md)
 
 Use forms, accessibility, security, performance, React/TSX, TypeScript,
 Tailwind, React Router, UI-state, and testing references only when the task

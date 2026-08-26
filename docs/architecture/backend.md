@@ -39,7 +39,8 @@ src/main/java/com/jobmanager/backend/
 └── auth/
 ```
 
-Actual features are introduced only when required by specifications.
+Actual features are introduced when required by specifications or explicitly
+requested outside the specification workflow.
 
 Avoid organizing the entire backend as:
 
@@ -215,12 +216,12 @@ accepted explicitly.
 
 Load only what the task requires:
 
-- [project structure](../../.agents/skills/backend-development/references/architecture/project-structure.md)
-- [layered architecture](../../.agents/skills/backend-development/references/architecture/layered-architecture.md)
-- [clean architecture](../../.agents/skills/backend-development/references/architecture/clean-architecture.md)
-- [dependency direction](../../.agents/skills/backend-development/references/architecture/dependency-direction.md)
-- [cohesion and coupling](../../.agents/skills/backend-development/references/architecture/cohesion-coupling.md)
-- [SOLID](../../.agents/skills/backend-development/references/architecture/solid.md)
+- [project structure](../../.claude/skills/backend-development/references/architecture/project-structure.md)
+- [layered architecture](../../.claude/skills/backend-development/references/architecture/layered-architecture.md)
+- [clean architecture](../../.claude/skills/backend-development/references/architecture/clean-architecture.md)
+- [dependency direction](../../.claude/skills/backend-development/references/architecture/dependency-direction.md)
+- [cohesion and coupling](../../.claude/skills/backend-development/references/architecture/cohesion-coupling.md)
+- [SOLID](../../.claude/skills/backend-development/references/architecture/solid.md)
 
 Use web, persistence, security, Spring, observability, Java, and testing
 references only when those concerns are actually involved.

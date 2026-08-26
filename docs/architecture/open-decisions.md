@@ -67,7 +67,11 @@ Boundaries: architecture drivers, C4, backend and repository structure.
 **Status:** Open
 
 Question: Will Contract-First/OpenAPI be accepted as durable project-wide
-architecture rather than used only when a Ready spec requires a formal HTTP
-contract?
+architecture, and under which accepted conditions may an applicable Ready spec
+or explicit user request require a formal HTTP contract?
 
 Boundaries: contracts, backend, frontend and methodology.
+
+Until this decision is accepted, neither execution path may introduce
+`contracts/openapi.yaml`. `ARCH-OPEN-004` must also be accepted before adopting
+OpenAPI linting, compatibility checking, publication, generation or stub tooling.

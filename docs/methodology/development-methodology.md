@@ -19,9 +19,9 @@ The project may use, proportionally and when relevant:
 - ADD and Quality Attribute Scenarios for architecture-significant trade-offs;
 - C4 to communicate system/container/component structure;
 - ADRs for accepted architecture-significant decisions and rationale;
-- Contract-First/OpenAPI when an applicable spec requires a formal HTTP
-  contract;
-- specification packages for executable feature authority;
+- Contract-First/OpenAPI when an applicable Ready spec or explicit user request
+  requires a formal HTTP contract and the applicable architecture is accepted;
+- optional specification packages for executable feature authority;
 - RPI for execution of each task;
 - independent review/verification for post-implementation evidence.
 
@@ -35,16 +35,19 @@ for every feature, task-count thresholds, model tiers or editor-specific tools.
 
 ```text
 product behavior
-→ Ready specs/<id>/spec.md
+→ Ready specs/<id>/spec.md or an explicit user request
 
 feature technical design
-→ specs/<id>/design.md
+→ specs/<id>/design.md for package-driven work
+→ bounded local Plan for directly authorized work
 
 work breakdown
-→ specs/<id>/tasks.md
+→ specs/<id>/tasks.md for package-driven work
+→ bounded local Plan for directly authorized work
 
 post-implementation evidence
-→ specs/<id>/validation.md
+→ specs/<id>/validation.md for package-driven work
+→ proportional verification evidence for directly authorized work
 
 durable domain knowledge
 → accepted docs/domain documents
@@ -57,9 +60,11 @@ formal external representation
 ```
 
 Discovery, methodology, templates, Draft/Open documents, code and examples are
-not silent requirement sources.
+not silent requirement sources. Neither execution path may infer missing product
+requirements or silently resolve a material Draft/Open domain or architecture
+decision.
 
-## Canonical local flow
+## Canonical package-driven flow
 
 ```text
 Product intent
@@ -98,9 +103,10 @@ validation.md
 PASS | FAIL
 ```
 
-`Ready` and mandatory human approval are local Job Manager Harness policies.
-Ready authorizes execution. Validation occurs afterward; PASS does not redefine
-the spec, and FAIL starts correction plus re-verification.
+`Ready` and mandatory human approval are local Job Manager Harness policies for
+package-driven work. Ready authorizes execution within that workflow. An explicit
+user request may authorize work without a package. Validation occurs afterward;
+PASS does not redefine the spec, and FAIL starts correction plus re-verification.
 
 ## Specify
 
@@ -129,17 +135,25 @@ effort or time.
 Design maps requirements/ACs to components, interfaces, data, contracts,
 persistence, errors, security and verification. It cannot create requirements or
 silently decide cross-cutting architecture. Material Open Decisions must be
-resolved before Ready.
+resolved before Ready or before directly authorized dependent implementation.
 
 ## Contract/API design
 
-Formal contract work may happen during Draft/Design. The spec owns externally
-observable requirements, the design owns the feature's contract strategy, and
-`contracts/openapi.yaml` is the shared formal representation when applicable.
+Formal contract work may happen during Draft/Design. In package-driven work, the
+spec owns externally observable requirements and the design owns the feature's
+contract strategy. In directly authorized work, the explicit request owns the
+observable requirements and the bounded local Plan maps their contract strategy.
+`contracts/openapi.yaml` is the shared formal representation when applicable in
+either path.
 
-A Draft contract does not authorize implementation. Ready requires the
-applicable contract to be sufficiently defined and consistent. Do not promote a
-historical/provisional OpenAPI or invent endpoints without an applicable spec.
+A Draft contract does not authorize implementation by itself. Package-driven
+work requires the applicable contract to be sufficiently defined and consistent
+before Ready. Directly requested work may define the contract without a spec,
+but must not promote a historical/provisional OpenAPI or invent behavior absent
+from the user's request or another accepted source. It may create
+`contracts/openapi.yaml` only after `ARCH-OPEN-008` is accepted. OpenAPI linting,
+compatibility checking, publication, generation or stub tooling additionally
+requires accepted `ARCH-OPEN-004`.
 
 ## Tasks
 
@@ -175,13 +189,25 @@ Each `TASK-xxx` follows:
 Research → local Plan → Implement → Verify
 ```
 
-Research reads the Ready package, applicable contract, relevant accepted
-domain/architecture documents and the minimum necessary skills/references.
+Directly authorized work follows the same sequence without requiring a persisted
+`TASK-xxx` artifact.
 
-The local Plan is temporary operational planning for one task. It may define
-files, order, commands and checks. It is not a persisted specification artifact
-and cannot redefine requirements, ACs, design, architecture, contract impact,
-task scope or dependencies.
+For package-driven work, Research reads the Ready package. Otherwise it reads
+the explicit user request. Both paths also consume the applicable contract,
+relevant accepted domain/architecture documents and the minimum necessary
+skills/references.
+
+The local Plan is temporary and is not a persisted requirement source. In
+package-driven work, it is operational only: it may define files, order,
+commands and checks but cannot redefine requirements, ACs, design, contract
+impact, task scope or dependencies.
+
+In directly authorized work, the local Plan may also define feature-local
+technical design, contract mapping and work breakdown required to realize the
+explicit request. It cannot add observable product behavior, resolve a material
+Draft/Open decision, adopt cross-cutting architecture, contradict an accepted
+contract or introduce an unauthorized dependency. A required cross-cutting
+choice stops execution until it is accepted in the durable architecture owner.
 
 If a material change is discovered:
 
@@ -190,9 +216,14 @@ STOP → Draft/refinement → correct artifacts → consistency review
 → human approval → Ready → resume
 ```
 
+That transition applies to package-driven work. In directly authorized work,
+stop and obtain the missing human product decision or acceptance of the durable
+domain/architecture decision before resuming; creating a package is optional.
+
 ## Independent Validate
 
-After execution, a verifier/reviewer independent from the author records:
+After package-driven execution, a verifier/reviewer independent from the author
+records in `validation.md`:
 
 - task completion;
 - evidence for every AC;
@@ -202,6 +233,8 @@ After execution, a verifier/reviewer independent from the author records:
 - final verdict PASS or FAIL.
 
 Missing evidence is a gap. The verifier cannot invent evidence or requirements.
+Outside the package workflow, proportional review and verification still apply,
+but `validation.md` is optional.
 Detailed runner state/telemetry is deferred to a future `harness-runner` spec.
 
 ## Architecture methods

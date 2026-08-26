@@ -11,9 +11,9 @@
 
 This document records candidate cross-feature domain rules.
 
-A Ready specification may use a rule here only after that rule has appropriate
-accepted authority. Draft/Open rules are refinement context, not implementation
-authorization.
+A Ready specification or explicit user request may use a rule here only after
+that rule has appropriate accepted authority. Draft/Open rules are refinement
+context, not implementation authorization.
 
 Frontend validation may mirror a rule for user experience, but durable
 invariants remain enforced by the backend and, where applicable, by database
@@ -400,7 +400,8 @@ KM 3
 
 se o produto decidir aceitá-los.
 
-A validação final precisa ser definida na spec.
+A validação final precisa ser definida na spec Ready ou solicitação explícita
+aplicável.
 
 ---
 
@@ -665,7 +666,7 @@ salvo regra explícita diferente.
 
 ---
 
-## DISCOVERY-006 — Filtros disponíveis precisam ser definidos pela spec
+## DISCOVERY-006 — Filtros disponíveis precisam ser definidos pela autoridade aplicável
 
 **Status:** OPEN
 
@@ -951,6 +952,6 @@ Princípio:
 # 20. Open rules
 
 Material unresolved domain questions are centralized in
-[Open Domain Decisions](open-decisions.md). A dependent spec remains Draft until
-each applicable decision is resolved in the correct owner or explicitly outside
-scope.
+[Open Domain Decisions](open-decisions.md). A dependent spec remains Draft, and
+directly authorized dependent implementation remains paused, until each
+applicable decision is resolved in the correct owner or explicitly outside scope.

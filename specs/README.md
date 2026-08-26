@@ -57,19 +57,25 @@ Product intent
 ```
 
 During initial Draft, `spec.md` may exist alone. During refinement, design,
-tasks and applicable formal contracts may be created and validated. Draft does
-not authorize application implementation, application-test changes for the
-feature, executable feature migrations, task execution or fabricated validation
-evidence.
+tasks and applicable formal contracts may be created and validated. A Draft
+package does not by itself authorize application implementation, application-test
+changes for the feature, executable feature migrations, task execution or
+fabricated validation evidence. Its status does not block work independently
+authorized by an explicit user request outside the package workflow.
+
+That separate authorization still cannot supply missing product requirements or
+silently accept a material domain/architecture decision from Draft/Open
+material. Dependent work pauses until human authority resolves and records the
+decision in its durable owner.
 
 Ready requires valid and mutually consistent `spec.md`, `design.md` and
 `tasks.md`. Human approval is required before the physical `Draft → Ready`
 transition. `validation.md` is created after execution and is never a Ready
 prerequisite.
 
-If implementation discovers a material change, stop, return the package to
-Draft, correct it, repeat consistency review/human approval, and reach Ready
-again before resuming.
+If package-driven implementation discovers a material change, stop, return the
+package to Draft, correct it, repeat consistency review/human approval, and reach
+Ready again before resuming that workflow.
 
 ## `spec.md` — behavior and lifecycle
 
@@ -90,7 +96,8 @@ Rules:
 - `spec.md` is the only lifecycle owner;
 - `scope` is case-sensitive and controls expected depth, not Ready artifacts;
 - no numeric thresholds for files, tasks, tokens, model, effort or time apply;
-- Draft and Superseded never authorize implementation;
+- Draft and Superseded do not independently authorize implementation and do not
+  override a separate explicit user authorization;
 - material product decisions cannot be invented;
 - Ready cannot use Draft/Open external documents as normative authority;
 - HTTP impact and applicable formal contracts must be explicit;
@@ -262,5 +269,6 @@ one decision does not automatically promote an entire Draft document.
   applicable;
 - `tasks.md` implements the already-defined contract.
 
-Formal contract work may occur during Draft/Design but never authorizes
-implementation. Ready requires sufficient applicable contract definition.
+Formal contract work may occur during Draft/Design but does not alone authorize
+implementation. Package-driven execution requires sufficient applicable contract
+definition before Ready.
