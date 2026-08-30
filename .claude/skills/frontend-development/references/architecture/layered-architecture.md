@@ -155,25 +155,6 @@ Shared → Feature
 
 Camadas de menor nível não conhecem detalhes das camadas de apresentação.
 
-## Keep Pure Logic Outside React
-
-[DEFAULT] Se uma regra pode existir como função pura, mantenha-a fora de hooks.
-
-Evite:
-
-```tsx
-function useCanApplyToVacancy(
-  vacancy: Vacancy,
-  user: User,
-) {
-  return canApplyToVacancy(vacancy, user)
-}
-```
-
-quando o wrapper React não adiciona nenhuma responsabilidade.
-
-Componentes e hooks podem consumir diretamente funções puras quando isso mantém os boundaries corretos.
-
 ## Hooks Coordinate; They Do Not Absorb Everything
 
 [DEFAULT] Um hook pode coordenar uma operação React:
@@ -291,3 +272,11 @@ Outras responsabilidades:
 - state ownership → `state-placement.md`;
 - repository/transport details → `data-access.md`;
 - router dependencies → `routing.md`.
+
+## Stack Mechanism
+
+The stack-specific mechanisms for this concern live in the overlay skill for the
+technology in use, when one exists. This reference states the rule; the overlay
+states how the stack expresses it. When no overlay exists, the rule still applies
+and the mechanism comes from general knowledge of that technology, declared as
+such.

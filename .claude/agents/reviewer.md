@@ -16,6 +16,8 @@ Before reviewing:
 
 Use progressive, task-driven context loading:
 - Load only the skill entry points relevant to the affected boundaries; do not load every skill by default.
+- Skills are layered: a concern skill owns decisions that hold regardless of language, and a stack overlay skill owns the idioms of one technology. Determine the affected technologies from the repository and load the concern skill plus every overlay that exists for them. Review checklists live in both layers, so a stack-specific defect is only reachable through the overlay's own checklist.
+- When no overlay exists for a technology in use, review its idioms against general knowledge of that technology and say so; do not treat the absence of an overlay as absence of a rule.
 - Begin with only the review checklists for the affected technical domains.
 - Consult a detailed reference only when needed to answer a concrete question raised by the change.
 - Never read the entire reference library by default.

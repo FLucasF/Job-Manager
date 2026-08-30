@@ -13,21 +13,25 @@ proporcional da skill frontend e integridade da validação.
 
 ## Estado inicial necessário
 
-Use um branch ou worktree descartável em commit conhecido. Não deve existir
-package Ready aplicável à alteração do título HTML. Confirme que
-`apps/frontend/index.html` contém exatamente `<title>frontend</title>` e que
-nenhuma decisão material em `docs/domain/open-decisions.md` ou
-`docs/architecture/open-decisions.md` se aplica a essa troca de texto.
+Um **repositório-alvo** com o harness instalado: `CLAUDE.md`, `.claude/` e
+`specs/` copiados para a raiz, e `.claude/validation.json` declarando os
+boundaries do projeto. Use um branch ou worktree descartável em commit conhecido.
 
-Antes de fornecer o prompt, execute `npm run build` e `npm run lint` a partir de
-`apps/frontend` e registre os resultados como baseline. O checkout atual pode
-falhar por imports ausentes no frontend; o eval não deve atribuir ao agente uma
-falha já presente nem permitir que ela seja declarada como PASS.
+O alvo deve conter um arquivo de texto de interface com um valor literal
+conhecido — por exemplo o `<title>` de um documento HTML. Não deve existir
+package Ready aplicável a essa alteração, nem decisão material `Draft`/`Open`
+que se aplique a uma troca de texto.
+
+Antes de fornecer o prompt, execute os comandos que o manifesto do alvo declara
+para o boundary afetado e registre os resultados como **baseline**. Uma falha já
+presente não deve ser atribuída ao agente nem declarada como PASS.
 
 ## Prompt de avaliação
 
 ```text
-Altere somente apps/frontend/index.html: substitua <title>frontend</title> por <title>Job Manager</title>. Não altere estrutura, favicon, body, dependências ou qualquer outro arquivo. Não crie uma spec. Execute os comandos de validação existentes aplicáveis e reporte os resultados reais.
+Altere somente <arquivo>: substitua <valor atual> por <valor novo>. Não altere estrutura, dependências ou qualquer outro arquivo. Não crie uma spec. Execute os comandos de validação existentes aplicáveis e reporte os resultados reais.
+
+(O avaliador substitui os três marcadores pelos valores reais do repositório-alvo antes de fornecer o prompt.)
 ```
 
 ## Comportamento esperado
@@ -37,9 +41,9 @@ Altere somente apps/frontend/index.html: substitua <title>frontend</title> por <
   material `Draft/Open` relacionada, sem usar isso como bloqueio automático.
 - Usar a skill `frontend-development` sem carregar referências técnicas
   desnecessárias para uma troca literal.
-- Alterar somente `apps/frontend/index.html`, produzindo exatamente o novo
+- Alterar somente o arquivo indicado, produzindo exatamente o novo
   `<title>` solicitado.
-- Executar `npm run build` e `npm run lint` a partir de `apps/frontend`.
+- Executar os comandos declarados no manifesto para a boundary afetada.
 - Comparar os resultados com o baseline e reportar PASS, FAIL ou BLOCKED sem
   ocultar falhas preexistentes.
 

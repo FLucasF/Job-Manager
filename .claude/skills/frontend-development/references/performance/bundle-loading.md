@@ -65,20 +65,6 @@ const module = await import('./feature')
 
 Não transforme imports estáticos pequenos em dynamic imports apenas para aumentar número de chunks.
 
-## `React.lazy`
-
-Use `lazy` quando um component React deve ter seu código carregado apenas quando renderizado.
-
-```tsx
-const MarkdownPreview = lazy(
-  () => import('./MarkdownPreview'),
-)
-```
-
-[HARD RULE] Declare lazy components no module scope, não dentro de outro component.
-
-Criar `lazy()` durante render pode resetar state e recriar component identity.
-
 ## Suspense for Lazy Code
 
 Um lazy component precisa de um Suspense boundary apropriado.
@@ -108,22 +94,6 @@ Use Suspense somente para fontes/flows que realmente suspendem.
 Se React Router já oferece uma estratégia de route lazy loading no mode usado, preserve essa estratégia.
 
 [HARD RULE] Não crie uma segunda camada de lazy loading conflitante com o router/framework.
-
-## Vite Dynamic Imports
-
-[DEFAULT] Em Vite, preserve dynamic imports que possam ser analisados/bundled corretamente.
-
-Não construa import path arbitrário vindo de runtime/user input.
-
-Além de fragilidade de build, remote/plugin imports podem criar security boundary.
-
-## Vite Async Chunks
-
-Vite já aplica otimizações para async chunk loading e CSS associado a chunks.
-
-[HARD RULE] Não adicione preload manual para todo chunk antes de medir benefício.
-
-Bundler defaults devem ser preservados até existir motivo concreto para override.
 
 ## Chunk Count
 
@@ -244,3 +214,11 @@ Outras responsabilidades:
 - loading UX → ui-states/loading;
 - measurement → `measurement-profiling.md`;
 - network data → `data-network.md`.
+
+## Stack Mechanism
+
+The stack-specific mechanisms for this concern live in the overlay skill for the
+technology in use, when one exists. This reference states the rule; the overlay
+states how the stack expresses it. When no overlay exists, the rule still applies
+and the mechanism comes from general knowledge of that technology, declared as
+such.

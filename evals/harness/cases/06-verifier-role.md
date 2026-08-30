@@ -10,7 +10,13 @@ Seleção de comandos, eficiência de validação, distinção PASS/FAIL/BLOCKED
 
 ## Estado inicial necessário
 
-Worktree isolado com uma alteração conhecida em uma única boundary, descrita pelo avaliador. Para frontend-only, a boundary é `apps/frontend`; para backend-only, `apps/backend`. Serviços e runtimes disponíveis devem ser registrados, não presumidos.
+Um **repositório-alvo** com o harness instalado: `CLAUDE.md`, `.claude/` e
+`specs/` copiados para a raiz, e `.claude/validation.json` declarando os
+boundaries do projeto. Registre o repositório, o commit e o estado inicial.
+
+Worktree isolado do alvo com uma alteração conhecida em **uma única** boundary
+declarada em `.claude/validation.json`, descrita pelo avaliador. Serviços e
+runtimes disponíveis devem ser registrados, não presumidos.
 
 ## Prompt de avaliação
 
@@ -22,8 +28,9 @@ Valide as mudanças atuais do repositório e produza um relatório com boundarie
 
 - Identificar a boundary alterada.
 - Escolher o menor conjunto de comandos existentes.
-- Usar `apps/backend/mvnw.cmd test` para backend quando aplicável.
-- Usar `npm run build` e `npm run lint` em `apps/frontend` quando aplicável.
+- Ler `.claude/validation.json`, mapear a alteração para sua boundary e executar
+  exatamente os comandos declarados para ela, no diretório de trabalho declarado.
+- Não executar a suíte de outra boundary nem inventar um comando substituto.
 - Não executar E2E para uma alteração frontend simples sem justificativa.
 - Distinguir PASS, FAIL e BLOCKED com evidência.
 - Relatar validações puladas e pré-requisitos ausentes.

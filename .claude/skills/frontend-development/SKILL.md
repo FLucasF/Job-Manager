@@ -1,11 +1,11 @@
 ---
 name: frontend-development
-description: Implementa, altera, corrige e revisa frontend React com TypeScript conforme um package Ready aplicável em specs/ ou uma solicitação explícita do usuário. Use para arquitetura frontend, componentes, hooks, formulários, estados de UI, acessibilidade, segurança do browser, performance, Tailwind, React Router e testes unitários ou de integração frontend. Não use para jornadas E2E completas no browser; encaminhe-as para quality-assurance.
+description: Implementa, altera, corrige e revisa codigo de interface do usuario conforme um package Ready aplicavel em specs/ ou uma solicitacao explicita do usuario. Use para arquitetura de frontend, formularios, estados de UI, acessibilidade, seguranca no browser, performance e testes unitarios ou de integracao de frontend, independentemente de framework. Detecte as tecnologias do boundary a partir do repositorio e carregue todas as skills de overlay que existirem para elas; quando nao existir nenhuma, aplique conhecimento geral daquela tecnologia apenas para idiomas e declare isso. Nao use para jornadas end-to-end completas no browser; encaminhe-as para quality-assurance.
 ---
 
 # Frontend Development
 
-Use esta skill para mudanças e revisões no boundary React/TypeScript.
+Use esta skill para mudanças e revisões no boundary de interface do usuário.
 `CLAUDE.md` governa o gate de specs, RPI, arquitetura, segurança, validação e
 conclusão.
 
@@ -31,9 +31,9 @@ silenciosamente.
 1. A partir da Research concluída contra o package Ready aplicável ou a
    solicitação explícita do usuário, mapeie critérios de aceite frontend para
    estados e comportamentos observáveis.
-2. Inspecione somente implementação, testes, `package.json`, TypeScript, Vite e
-   configurações dos boundaries afetados.
-3. Confirme que React Router, Tailwind, biblioteca de testes e outras ferramentas
+2. Inspecione somente implementação, testes, manifesto de dependências, tipagem,
+   configuração de build e configurações dos boundaries afetados.
+3. Confirme que roteamento, estilização, biblioteca de testes e outras ferramentas
    necessárias já fazem parte da arquitetura e configuração.
 4. Carregue a menor combinação de referências para os problemas técnicos
    concretos abaixo.
@@ -42,8 +42,32 @@ silenciosamente.
 6. Use testes unitários para lógica isolada e integração para colaboração entre
    componentes, hooks, estado e data access. Encaminhe jornadas completas no
    browser para `quality-assurance`.
-7. Execute `npm run build` e `npm run lint` em `apps/frontend`, aplique os
-   checklists relevantes e confira cada critério de aceite e falha aplicável.
+7. Execute os comandos de validação que o `.claude/validation.json` declara para
+   o boundary afetado, exatamente como escritos, e aplique os resultados a cada
+   critério de aceite e caminho de falha aplicável.
+
+## Stack Overlay
+
+Esta skill cobre preocupações que valem independentemente do framework:
+arquitetura, formulários, estados de UI, acessibilidade, segurança, performance
+e testes. Ela não carrega os idiomas de uma stack específica.
+
+Determine as tecnologias do boundary afetado a partir do próprio repositório e
+procure um overlay correspondente. Linguagem, framework, roteamento e estilização
+são overlays separados; carregue todos os que existirem.
+
+- Quando existir overlay, carregue-o. Seus idiomas são autoridade do repositório.
+- Quando não existir, aplique seu próprio conhecimento daquela tecnologia e
+  declare isso: nomeie a tecnologia e registre que os idiomas vêm de
+  conhecimento geral, não de autoridade do repositório.
+
+O fallback cobre apenas idiomas. Ele nunca autoriza dependência, escolha de
+biblioteca, padrão arquitetural, ferramenta ou comportamento observável. Esta
+skill, o `CLAUDE.md` e a arquitetura aceita continuam governando o trabalho sem
+alteração, com ou sem overlay.
+
+A referência de concern define a regra; o overlay define o mecanismo. Se
+parecerem divergir, a regra prevalece e a divergência é reportada.
 
 ## Reference Loading Rules
 
@@ -161,111 +185,14 @@ Use estas referências para riscos específicos do frontend/browser. Autenticaç
 
 [HARD RULE] Não altere autenticação, autorização, cookie policy, CSP ou backend security architecture incidentalmente; sinalize riscos fora do escopo e preserve o boundary responsável.
 
-## TypeScript
-
-- Type safety, `any`, assertions, object modeling, `keyof` e dynamic access:
-  [type-safety.md](references/typescript/type-safety.md)
-
-- Inferência, contextual typing, generics e constraints:
-  [inference-generics.md](references/typescript/inference-generics.md)
-
-- `null`, `undefined`, optional chaining e narrowing:
-  [nullability.md](references/typescript/nullability.md)
-
-- Imports, exports, `.d.ts`, typings e module resolution:
-  [modules-imports.md](references/typescript/modules-imports.md)
-
-- `tsconfig.json`, strictness, `target`, `lib`, module options e compiler plugins:
-  [compiler-config.md](references/typescript/compiler-config.md)
-
-- Revisão TypeScript:
-  [review-checklist.md](references/typescript/review-checklist.md)
-
-[HARD RULE] Regras específicas de React/TSX pertencem a `references/react-tsx/`, não a `references/typescript/`.
-
-## React + TypeScript
-
-- Props, native wrappers, optionality, callback contracts e hook-derived prop coupling:
-  [props.md](references/react-tsx/props.md)
-
-- `children`, `React.ReactNode` e conteúdo renderizável:
-  [children.md](references/react-tsx/children.md)
-
-- Event handlers e callbacks públicos:
-  [events.md](references/react-tsx/events.md)
-
-- DOM refs, React 19 ref props e compatibilidade com `forwardRef`:
-  [refs.md](references/react-tsx/refs.md)
-
-- Design e tipagem de custom hooks:
-  [custom-hooks.md](references/react-tsx/custom-hooks.md)
-
-- Context, providers, consumer hooks e `use()`:
-  [context.md](references/react-tsx/context.md)
-
-- Effects, external synchronization, dependencies, cleanup e Effect Events:
-  [effects-synchronization.md](references/react-tsx/effects-synchronization.md)
-
-- Componentes genéricos e relações entre props:
-  [generic-components.md](references/react-tsx/generic-components.md)
-
-- Render Props, render functions e slots:
-  [render-props-slots.md](references/react-tsx/render-props-slots.md)
-
-- Estado local com actions tipadas e `useReducer`:
-  [use-reducer.md](references/react-tsx/use-reducer.md)
-
-- Stale closures, dependency arrays e callbacks:
-  [stale-callbacks.md](references/react-tsx/stale-callbacks.md)
-
-- `React.memo`, memoization e estabilidade de props:
-  [memo-stable-props.md](references/react-tsx/memo-stable-props.md)
-
-- APIs tipadas de componentes de design system:
-  [design-system-components.md](references/react-tsx/design-system-components.md)
-
-- Revisão React + TypeScript:
-  [review-checklist.md](references/react-tsx/review-checklist.md)
-
-[HARD RULE] Mecânica geral da linguagem TypeScript pertence a `references/typescript/`; esta pasta cobre decisões específicas da combinação React + TypeScript.
-
-## React Router
-
-[HARD RULE] Antes de usar APIs específicas, identifique se o projeto utiliza Declarative, Data ou Framework Mode.
-
-- Mode atual, compatibilidade de APIs e boundary de migração:
-  [mode-selection.md](references/react-router/mode-selection.md)
-
-- Route trees, nested/layout/index routes, dynamic segments e `Outlet`:
-  [route-configuration.md](references/react-router/route-configuration.md)
-
-- `Link`, `NavLink`, `useNavigate`, redirects e history semantics:
-  [navigation.md](references/react-router/navigation.md)
-
-- `useParams`, `useSearchParams`, `useLocation`, parsing e serialization de URL:
-  [params-search-params.md](references/react-router/params-search-params.md)
-
-- Loaders, actions, `<Form>`, fetchers, pending e revalidation em Data/Framework Mode:
-  [data-router.md](references/react-router/data-router.md)
-
-- Route error boundaries, `useRouteError`, loader/action failures e not-found:
-  [route-errors.md](references/react-router/route-errors.md)
-
-- Revisão consolidada de React Router:
-  [review-checklist.md](references/react-router/review-checklist.md)
-
-[HARD RULE] `architecture/routing.md` decide o contrato de URL/navegação; estas referências apenas orientam sua implementação com React Router.
-
-[HARD RULE] Não carregue todas as referências de react-router por padrão.
-
 ## Performance
 
 [HARD RULE] Não otimize por suposição. Meça o problema antes de introduzir otimizações.
 
-- Measurement-first workflow, React/browser profiling, baseline e before/after validation:
+- Measurement-first workflow, profiling de browser, baseline e validação before/after:
   [measurement-profiling.md](references/performance/measurement-profiling.md)
 
-- React rendering cost, state boundaries, React Compiler, memoization e large lists:
+- Custo de renderização, state boundaries, memoization e listas grandes:
   [rendering-performance.md](references/performance/rendering-performance.md)
 
 - Initial JavaScript, dynamic imports, `lazy`, Suspense, chunks e dependency cost:
@@ -280,44 +207,9 @@ Use estas referências para riscos específicos do frontend/browser. Autenticaç
 - Revisão consolidada de performance:
   [review-checklist.md](references/performance/review-checklist.md)
 
-[HARD RULE] Antes de recomendar memoization manual em código novo, verifique se React Compiler está habilitado no projeto.
+[HARD RULE] Antes de recomendar memoization manual em código novo, verifique no overlay de stack se o compilador do framework já elimina a necessidade.
 
 [HARD RULE] Não carregue todas as referências de performance por padrão.
-
-## Tailwind
-
-- Flex, grid, positioning, stacking, overflow e layout:
-  [layout.md](references/tailwind/layout.md)
-
-- Spacing, dimensions, min/max sizing e viewport units:
-  [spacing-sizing.md](references/tailwind/spacing-sizing.md)
-
-- Typography, wrapping, truncation e font features:
-  [typography.md](references/tailwind/typography.md)
-
-- Backgrounds, gradients, borders, radius e outlines:
-  [backgrounds-borders.md](references/tailwind/backgrounds-borders.md)
-
-- Shadows, rings, filters, backdrop effects e masks:
-  [effects-filters-masks.md](references/tailwind/effects-filters-masks.md)
-
-- Transitions, animations, transforms, motion e perspective:
-  [transforms-transitions.md](references/tailwind/transforms-transitions.md)
-
-- Native controls, scrolling, pointer, touch e `will-change`:
-  [interactivity.md](references/tailwind/interactivity.md)
-
-- Breakpoints, container queries, states, ARIA/data variants e dark mode:
-  [responsive-variants.md](references/tailwind/responsive-variants.md)
-
-- `@theme`, tokens, custom utilities, custom variants, prefix e important:
-  [theme-customization.md](references/tailwind/theme-customization.md)
-
-- Vite, PostCSS, CLI, editor tooling e integrations:
-  [tooling-integrations.md](references/tailwind/tooling-integrations.md)
-
-- Revisão Tailwind:
-  [review-checklist.md](references/tailwind/review-checklist.md)
 
 ## Frontend Testing
 
@@ -357,7 +249,7 @@ Classifique o teste pelo boundary definido na autoridade aplicável:
 
 ## Project Rules
 
-- Preserve type safety e a configuração TypeScript existente; evite `any` quando
+- Preserve type safety e a configuração de tipos existente; evite escapes de tipo quando
   houver alternativa segura.
 - Reutilize tipos e componentes compatíveis e não duplique contratos da API sem
   necessidade.

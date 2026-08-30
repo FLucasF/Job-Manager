@@ -1,9 +1,9 @@
-# Job Manager — Project Operating Contract
+# Harness — Project Operating Contract
 
 ## Purpose and precedence
 
-This repository contains the Job Manager backend and frontend. System and user
-instructions take precedence over this file.
+This file is the operating contract for agent work in the project it governs.
+System and user instructions take precedence over it.
 
 Sources of truth are separated by responsibility:
 
@@ -11,13 +11,17 @@ Sources of truth are separated by responsibility:
   behavior outside the specification workflow;
 - a valid `Ready` package in `specs/<spec-id>/` defines feature behavior;
 - `specs/README.md` defines the package contract and lifecycle;
-- accepted documents under `docs/domain/` own durable domain knowledge;
-- accepted documents under `docs/architecture/` own project-wide architecture;
-- `contracts/` owns formal shared external contracts when applicable;
+- accepted domain documents own durable domain knowledge, where the project
+  defines them;
+- accepted architecture documents own project-wide architecture, where the
+  project defines them;
+- accepted formal contracts own shared external interfaces, when applicable;
 - `.claude/skills/` contains reusable workflows and technical guidance;
 - `.claude/agents/` defines the specialized `reviewer` and `verifier` roles;
 - `.claude/settings.json` contains concrete tool-permission configuration;
-- `apps/` contains implementation and is not a requirement source.
+- `.claude/validation.json` declares the project's boundaries and their
+  validation commands;
+- application code is implementation and is not a requirement source.
 
 Repository location does not grant authority outside those responsibilities.
 Draft/Open documents, code, tests, examples, templates and research are context,
@@ -35,7 +39,7 @@ specs/<spec-id>/
 └── validation.md  # created after implementation
 ```
 
-`spec.md` owns the package lifecycle. `Ready` is a local Job Manager Harness
+`spec.md` owns the package lifecycle. `Ready` is a local Harness
 policy and requires valid, mutually consistent `spec.md`, `design.md` and
 `tasks.md`. `validation.md` is not part of the Ready Gate.
 
@@ -121,19 +125,23 @@ and final verdict `PASS` or `FAIL`. Missing evidence is a gap, not a pass. A
 failure requires correction and new verification; validation never creates new
 requirements or silently rewrites spec/design/tasks.
 
-## Repository boundaries
+## Boundaries
 
-- `apps/backend/`: Java/Spring backend, HTTP, validation, security, persistence,
-  migrations and backend tests.
-- `apps/frontend/`: React/TypeScript UI, routing, client state, accessibility and
-  frontend tests.
-- `contracts/`: formal shared/versioned external contracts.
+`.claude/validation.json` declares the governed project's boundaries: which paths
+belong to each, and which validation commands exist for them. Read it instead of
+assuming a layout.
+
+The harness itself occupies fixed paths:
+
+- `CLAUDE.md`: this contract.
 - `specs/`: feature packages and reserved `_templates/` scaffolding.
-- `docs/`: durable product, domain, architecture and methodology documentation.
+- `docs/`: durable project documentation.
 - `.claude/skills/`: reusable workflows/references, not project requirements.
 - `.claude/agents/`: specialized reviewer/verifier role definitions.
 - `.claude/settings.json`: concrete harness permissions, without credentials or
   personal paths.
+- `.claude/validation.json`: declarative map from changed paths to boundaries and
+  to the validation commands that exist for them.
 
 Keep transport, application/domain, persistence and infrastructure concerns at
 their documented boundaries. Do not add speculative behavior, dependencies,
@@ -147,30 +155,32 @@ When a material architecture choice is missing or conflicts with accepted
 architecture, stop and resolve it in the correct owner; add an ADR when durable
 decision history is warranted.
 
-For package-driven HTTP changes:
+For package-driven changes to a shared external interface:
 
 - `spec.md` owns externally observable requirements;
 - `design.md` owns the feature's technical/contract design;
-- `contracts/openapi.yaml` is the shared formal representation when applicable;
+- the project's formal contract artifact is the shared representation, when the
+  project defines one;
 - `tasks.md` implements the already-defined contract.
 
-For directly authorized HTTP changes, the explicit user request owns observable
-requirements. The local Plan may map them to feature-local implementation and
-contract details within accepted architecture without becoming a persisted
-requirement or cross-cutting architecture source.
-Keep `contracts/openapi.yaml` synchronized when applicable.
+For directly authorized interface changes, the explicit user request owns
+observable requirements. The local Plan may map them to feature-local
+implementation and contract details within accepted architecture without becoming
+a persisted requirement or cross-cutting architecture source. Keep the applicable
+contract artifact synchronized.
 
 Contracts may be designed during Draft, but their presence alone is not product
 authority. Package-driven implementation requires applicable contracts to be
 sufficiently defined and consistent before Ready. Directly authorized work may
 define and implement the contract together when the user's request supplies the
 necessary behavior, but only after any applicable material architecture decision
-has been accepted. Treat API/database changes as compatibility-sensitive and
-keep contracts and migrations synchronized.
+has been accepted. Treat interface and database changes as
+compatibility-sensitive and keep contracts and migrations synchronized.
 
-Creating `contracts/openapi.yaml` requires accepted `ARCH-OPEN-008`. Adopting
-OpenAPI linting, compatibility checking, publication, generation or stub tooling
-also requires accepted `ARCH-OPEN-004`.
+Adopting a formal contract format, or tooling for linting, compatibility
+checking, publication, generation or stubs, is a project-wide architecture
+decision. It requires explicit acceptance in the project's architecture owner
+before use.
 
 ## Skills and references
 
@@ -179,17 +189,39 @@ not authorize technologies, dependencies, requirements or architecture. When a
 reference conflicts with a Ready spec or accepted architecture, follow the
 higher-authority source and report the conflict.
 
+Skills are layered. A concern skill owns decisions that hold regardless of
+language. A stack overlay skill owns the idioms of one technology.
+
+Determine the affected boundary's technologies from the repository itself, then
+load the concern skill plus every overlay that exists for those technologies.
+Language, framework, routing and styling are separate overlays; load each one
+that applies.
+
+When no overlay exists for a technology in use, do not stop and do not assume the
+idioms of a technology you recognize instead. Apply your own knowledge of that
+technology and state that you are doing so, naming the technology and noting that
+its idioms come from general knowledge rather than from repository authority.
+
+That fallback covers idioms only. It never authorizes a dependency, a library
+choice, an architectural pattern, a tool or observable behavior. Everything in
+this contract, the accepted architecture and domain documents and the applicable
+specification continues to govern the work unchanged, overlay or not.
+
 ## Validation commands
 
-Use existing commands; do not invent replacements:
+`.claude/validation.json` is the authoritative map from changed paths to
+boundaries and to the validation commands that already exist for them. Read it
+instead of assuming a toolchain from build files or familiar conventions.
 
-- backend: `apps/backend/mvnw.cmd test`;
-- frontend build/typecheck: `npm run build` from `apps/frontend`;
-- frontend lint: `npm run lint` from `apps/frontend`.
+Run only the commands declared for the boundaries actually affected, exactly as
+written and from the declared working directory. Do not invent replacements. A
+boundary with no declared command has no executable validation; report that
+rather than substituting another boundary's suite.
 
-Run only commands relevant to changed boundaries. Report exact missing
-prerequisites. Never weaken assertions, suppress errors, add retries, bypass
-security controls or alter validation configuration merely to obtain a pass.
+Report exact missing prerequisites. An unsatisfied prerequisite is `BLOCKED`,
+never `FAIL` and never `PASS`. Never weaken assertions, suppress errors, add
+retries, bypass security controls or alter validation configuration merely to
+obtain a pass.
 
 ## Security and external tools
 

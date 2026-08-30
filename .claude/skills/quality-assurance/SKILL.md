@@ -1,6 +1,6 @@
 ---
 name: quality-assurance
-description: Planeja, implementa, executa, diagnostica e revisa E2E com Playwright e jornadas completas no browser conforme um package Ready aplicável em specs/ ou uma solicitação explícita do usuário. Use para testes de aceitação ou regressão no browser, configuração e diagnóstico da suíte E2E e investigação de testes browser flaky. Não use para revisão manual sem browser ou testes unitários e de integração de frontend ou backend.
+description: Planeja, implementa, executa, diagnostica e revisa jornadas completas de usuario no browser conforme um package Ready aplicavel em specs/ ou uma solicitacao explicita do usuario. Use para testes de aceitacao ou regressao end-to-end, configuracao e diagnostico da suite e investigacao de testes flaky. Nenhuma ferramenta de E2E esta instalada no repositorio hoje; a ferramenta concreta viria dos comandos declarados em .claude/validation.json. Nao use para revisao manual sem browser nem para testes unitarios e de integracao de frontend ou backend.
 ---
 
 # Quality Assurance
@@ -42,6 +42,17 @@ solicitação de implementação não resolve essa decisão silenciosamente.
    bypassa a capability, com isolamento, determinismo e cobertura adequados.
 
 ## Infrastructure Gate
+
+Nenhuma ferramenta de E2E está instalada neste repositório hoje: não há
+dependência, configuração de runner nem suíte, e `.claude/validation.json` não
+declara comando de browser para nenhum boundary. As referências abaixo descrevem
+Playwright porque era a ferramenta pressuposta quando foram escritas; isso não é
+uma adoção do projeto.
+
+Enquanto não houver comando declarado, reporte que não existe validação E2E
+definida em vez de introduzir uma. As preocupações desta skill — jornadas, dados
+de teste, diagnóstico de falha e revisão — permanecem válidas independentemente
+da ferramenta escolhida.
 
 Antes de usar Playwright, confirme:
 

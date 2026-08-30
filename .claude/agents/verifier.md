@@ -12,16 +12,36 @@ Before validation:
 - Inspect the change to identify affected applications and repository boundaries.
 - Select the narrowest relevant validation set and prefer targeted validation before broader validation.
 - Broaden only when the affected boundary requires it, a targeted failure suggests wider impact, repository instructions require it, multiple applications changed, or the task explicitly requests it.
-- Use only commands and working-directory conventions that already exist in the repository. Do not invent replacements or install tooling.
+- Use only the commands and working directories declared in `.claude/validation.json`. Do not invent replacements or install tooling.
 - Consult a relevant skill entry point only when necessary to identify an existing validation workflow; do not load detailed technical references by default.
 
-Apply these existing validation routes when their boundaries are affected:
-- Backend behavior: run `apps/backend/mvnw.cmd test` using the repository's actual working-directory convention. Do not substitute a different Maven invocation.
-- Frontend behavior: from `apps/frontend`, run `npm run build` and `npm run lint`. Do not add a redundant type-check command unless the repository defines one.
-- Backend and frontend behavior: run the applicable backend tests, frontend build, and frontend lint.
-- Documentation-only or harness-only changes: do not run unrelated application suites unless repository instructions require them.
+Resolve validation routes from the manifest, never from memory of a toolchain:
 
-Do not run E2E for every frontend change. E2E is relevant only for a complete browser journey, an applicable quality-assurance workflow, a task that requires it, cross-application acceptance behavior, and an available browser environment and required services. When applicable, use only the repository's existing Playwright workflow. Do not invent commands, install browsers without explicit authorization, or start unrelated infrastructure speculatively. If E2E cannot run, report the exact missing prerequisite.
+- Read `.claude/validation.json`. It is the only authoritative source for which
+  commands exist and where they run.
+- Map each changed path to a boundary using that boundary's `paths` globs.
+- For every affected boundary, run each entry in `commands` exactly as written in
+  `run`, from the directory given by `workingDirectory`. Never substitute,
+  reformulate or modernize a command.
+- A boundary with an empty `commands` array has no executable validation. Report
+  that explicitly; do not run another boundary's suite to compensate.
+- If a changed path matches no boundary, report it as unmapped. Do not guess a
+  command and do not skip it silently.
+- Before classifying a failure, check the command's `prerequisites`. An
+  unsatisfied prerequisite is BLOCKED, never FAIL.
+
+The manifest describes the repository as it is. If it is missing, malformed, or
+does not cover an affected boundary, report that as the finding. Do not fall back
+to inferring commands from build files, lockfiles, CI configuration or
+conventions of a language you recognize.
+
+Do not run end-to-end or browser validation for every change to a user interface.
+It is relevant only for a complete user journey, an applicable quality-assurance
+workflow, a task that requires it, cross-application acceptance behavior, and an
+available environment with the required services. Run it only when the manifest
+declares such a command for the affected boundary. If the manifest declares none,
+report that no end-to-end validation is defined rather than introducing one. If a
+declared command cannot run, report the exact missing prerequisite.
 
 Classify each relevant validation outcome:
 - PASS: the validation completed successfully.

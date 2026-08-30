@@ -41,15 +41,6 @@ Do not use this checklist as a substitute for the detailed references.
 - [ ] Health output does not expose sensitive details.
 - [ ] Probe location accurately represents the real application traffic path.
 
-## Actuator Exposure
-
-- [ ] Only required Actuator endpoints are exposed.
-- [ ] Sensitive management endpoints have explicit network/security protection.
-- [ ] Exposure and authorization are treated as separate controls.
-- [ ] Anonymous health output is intentionally minimal.
-- [ ] Production metrics use the monitoring system's intended export endpoint.
-- [ ] Runtime-mutating management endpoints are not exposed without explicit authorization.
-
 ## Final Review
 
 - [ ] Observability helps answer operational questions without creating unnecessary telemetry.

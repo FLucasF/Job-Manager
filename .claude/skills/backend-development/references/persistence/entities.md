@@ -22,19 +22,6 @@ JPA Entity
 
 Do not expose JPA entities directly as REST request or response DTOs.
 
-## Separate Domain and JPA Models When the Boundary Matters
-
-Use separate domain and persistence models when doing so protects:
-
-- business invariants;
-- domain behavior;
-- persistence independence;
-- API independence;
-- aggregate boundaries.
-
-Do not duplicate models mechanically for trivial CRUD where the additional
-mapping provides no useful boundary.
-
 ## Entity Identity
 
 Define entity identity deliberately.
@@ -90,3 +77,11 @@ references.
 - persistence annotations leaking through unrelated application contracts
 - duplicate domain/JPA models with no boundary benefit
 - relying only on application validation for database integrity
+
+## Stack Mechanism
+
+The stack-specific mechanisms for this concern live in the overlay skill for the
+technology in use, when one exists. This reference states the rule; the overlay
+states how the stack expresses it. When no overlay exists, the rule still applies
+and the mechanism comes from general knowledge of that technology, declared as
+such.

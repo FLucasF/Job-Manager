@@ -10,12 +10,17 @@ Roteamento por skill, seleção progressiva de referências e distinção entre 
 
 ## Estado inicial necessário
 
-Checkout limpo do repositório atual, com `CLAUDE.md`, skills e referências disponíveis. Nenhuma alteração é necessária.
+Um **repositório-alvo** com o harness instalado: `CLAUDE.md`, `.claude/` e
+`specs/` copiados para a raiz, e `.claude/validation.json` declarando os
+boundaries do projeto. Registre o repositório, o commit e o estado inicial.
+
+O alvo deve conter um boundary de interface de usuário com código real.
+Nenhuma alteração é necessária.
 
 ## Prompt de avaliação
 
 ```text
-Analise a estrutura atual do frontend e identifique problemas relevantes de arquitetura ou organização.
+Analise a estrutura atual do boundary de interface de usuário e identifique problemas relevantes de arquitetura ou organização.
 
 Não faça alterações.
 

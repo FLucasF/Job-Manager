@@ -25,14 +25,6 @@ Infrastructure implements that contract using JPA or Spring Data.
 Do not create repository interfaces mechanically when there is no meaningful
 boundary.
 
-## Spring Data Repositories
-
-Use Spring Data repository interfaces inside the persistence implementation
-when they reduce boilerplate.
-
-Do not expose a Spring Data repository directly to controllers or unrelated
-features.
-
 ## Keep Contracts Intentional
 
 Prefer repository operations that express application needs.
@@ -76,3 +68,11 @@ Use that feature's deliberate application contract.
 - generic CRUD contracts that erase feature semantics
 - `null` collection results
 - direct cross-feature repository access
+
+## Stack Mechanism
+
+The stack-specific mechanisms for this concern live in the overlay skill for the
+technology in use, when one exists. This reference states the rule; the overlay
+states how the stack expresses it. When no overlay exists, the rule still applies
+and the mechanism comes from general knowledge of that technology, declared as
+such.

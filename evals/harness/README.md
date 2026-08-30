@@ -2,10 +2,10 @@
 
 ## Propósito
 
-Esta suíte avalia o comportamento observável do Claude Code dentro do harness do Job Manager: aderência ao contrato do repositório, seleção de contexto, controle de escopo, uso de papéis, disciplina de validação e separação entre fatos, orientação técnica e requisitos.
+Esta suíte avalia o comportamento observável do Claude Code dentro deste harness: aderência ao contrato do repositório, seleção de contexto, controle de escopo, uso de papéis, disciplina de validação e separação entre fatos, orientação técnica e requisitos.
 
 Ela não é um benchmark geral do modelo, não mede isoladamente conhecimento de
-Java, React ou Spring e não avalia qualidade funcional do Job Manager. O
+Java, React ou Spring e não avalia qualidade funcional de um produto. O
 roteamento entre package Ready e solicitação explícita é avaliado; a estrutura
 interna dos packages continua uma convenção documental, sem validador
 automatizado nesta versão.
@@ -16,6 +16,34 @@ Os oito casos em `cases/` usam prompts literais, precondições, evidências e a
 escala comum definida em `rubric.md`. Eles avaliam progressive disclosure, os
 caminhos bloqueado e positivo sem spec aplicável, escopo, não invenção
 arquitetural, os papéis `reviewer` e `verifier` e exploração cross-boundary.
+
+## Repositório-alvo
+
+O harness é uma camada de governança, não uma aplicação. Alguns casos avaliam o
+agente sobre o próprio harness (03 e 05); os demais precisam de código de
+aplicação para governar.
+
+Esses casos rodam contra um **repositório-alvo**: um projeto com o harness
+instalado — `CLAUDE.md`, `.claude/` e `specs/` na raiz — e com
+`.claude/validation.json` declarando seus boundaries e comandos. O alvo é
+escolhido pelo avaliador e registrado junto com o commit, porque o resultado só é
+comparável entre execuções que usem o mesmo alvo no mesmo estado.
+
+Não use o repositório do harness como alvo: ele não tem boundaries de aplicação,
+e forçar isso mede outra coisa.
+
+## Modalidades de execução
+
+A observabilidade depende de como o caso é executado, e isso muda quais campos do
+`run-record.md` podem ser preenchidos:
+
+- **Sessão de topo** (`claude` no terminal): o transcript fica em
+  `~/.claude/projects/` e permite registrar arquivos consultados, skills e
+  referências. É a modalidade canônica.
+- **Subagente**: mede comportamento e custo, mas o transcript pode não ser
+  recuperável. Nesse caso, arquivos consultados, skills e referências são
+  `não observável` **por limite da modalidade**, e isso deve ser declarado no
+  registro em vez de parecer omissão.
 
 ## Execução manual reproduzível
 

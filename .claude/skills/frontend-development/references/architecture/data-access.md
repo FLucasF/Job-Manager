@@ -94,23 +94,6 @@ vacancyRepository.findById(id)
 
 e não precisam conhecer `GET /vacancies`.
 
-## React Integration
-
-[DEFAULT] Hooks podem integrar Repository com server-state tooling.
-
-```tsx
-function useVacancies() {
-  return useQuery({
-    queryKey: ['vacancies'],
-    queryFn: vacancyRepository.findAll,
-  })
-}
-```
-
-[HARD RULE] Se Repository é o boundary adotado, não repita raw HTTP dentro do hook.
-
-Hook conhece a **operação**; Repository conhece o **transporte/fonte**.
-
 ## Shared Transport Client
 
 [DEFAULT] Centralize configuração transversal de transporte quando ela é realmente compartilhada.
@@ -272,3 +255,11 @@ Outras responsabilidades:
 - server-state ownership → `state-placement.md`;
 - form submission/error presentation → forms;
 - route navigation → `routing.md`.
+
+## Stack Mechanism
+
+The stack-specific mechanisms for this concern live in the overlay skill for the
+technology in use, when one exists. This reference states the rule; the overlay
+states how the stack expresses it. When no overlay exists, the rule still applies
+and the mechanism comes from general knowledge of that technology, declared as
+such.

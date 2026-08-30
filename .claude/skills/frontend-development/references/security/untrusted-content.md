@@ -34,18 +34,6 @@ persisted user content
 
 O fato de um valor vir do próprio backend não torna seu conteúdo automaticamente seguro para um sink executável no browser.
 
-## Prefer React Text Rendering
-
-[DEFAULT] Para conteúdo textual, preserve o rendering normal do React.
-
-```tsx
-<p>{comment.body}</p>
-```
-
-React trata esse valor como conteúdo textual em vez de interpretar a string como HTML.
-
-[HARD RULE] Não converta texto em HTML apenas para preservar formatação simples que pode ser representada por componentes/estrutura segura.
-
 ## `dangerouslySetInnerHTML`
 
 [HARD RULE] Não use `dangerouslySetInnerHTML` com HTML não confiável sem uma estratégia explícita de sanitização.
@@ -288,3 +276,11 @@ Outras responsabilidades:
 - storage/logging/env exposure → `sensitive-data.md`;
 - third-party scripts/SDKs → `third-party-code.md`;
 - generic data-access contracts → architecture/data-access.
+
+## Stack Mechanism
+
+The stack-specific mechanisms for this concern live in the overlay skill for the
+technology in use, when one exists. This reference states the rule; the overlay
+states how the stack expresses it. When no overlay exists, the rule still applies
+and the mechanism comes from general knowledge of that technology, declared as
+such.

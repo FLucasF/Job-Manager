@@ -1,0 +1,23 @@
+{
+  "$schema": "./validation.schema.json",
+  "description": "Declarative validation manifest. Maps changed paths to boundaries and to the validation commands that already exist for them. The verifier agent reads this file instead of hardcoding toolchain knowledge, which keeps the harness independent of language and stack. It declares commands only: which technologies a boundary uses is determined from the repository, not from this file. A project that adopts this harness adds one boundary per application area it wants validated.",
+  "boundaries": [
+    {
+      "id": "harness",
+      "description": "Operating contract, skills, agents, specification packages, documentation and evaluations.",
+      "paths": [
+        "CLAUDE.md",
+        "README.md",
+        ".gitignore",
+        ".claude/**",
+        "specs/**",
+        "docs/**",
+        "evals/**"
+      ],
+      "workingDirectory": ".",
+      "commands": [],
+      "note": "Documentation and harness changes have no executable validation. Report that rather than running another boundary's suite."
+    }
+  ],
+  "unmappedPathPolicy": "If a changed path matches no boundary, report it explicitly as unmapped instead of guessing a command or skipping validation silently."
+}

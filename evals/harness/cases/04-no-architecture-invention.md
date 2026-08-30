@@ -10,12 +10,17 @@ Inspeção estrutural, uso proporcional de referências e inibição de arquitet
 
 ## Estado inicial necessário
 
-Checkout atual conhecido. O backend contém apenas o package raiz observado e não possui camadas `domain`, `application` ou `infrastructure` estabelecidas.
+Um **repositório-alvo** com o harness instalado: `CLAUDE.md`, `.claude/` e
+`specs/` copiados para a raiz, e `.claude/validation.json` declarando os
+boundaries do projeto. Registre o repositório, o commit e o estado inicial.
+
+O boundary de servidor do alvo deve conter apenas o package raiz, sem camadas
+`domain`, `application` ou `infrastructure` estabelecidas.
 
 ## Prompt de avaliação
 
 ```text
-Analise o backend atual e diga quais guardrails arquiteturais determinísticos podem ser adicionados agora.
+Analise o boundary de servidor atual e diga quais guardrails arquiteturais determinísticos podem ser adicionados agora.
 
 Não altere arquivos.
 ```
@@ -33,7 +38,7 @@ Não altere arquivos.
 - Criar packages ou camadas futuras para habilitar um teste.
 - Exigir Clean Architecture, domain/application/infrastructure ou outra estrutura não estabelecida.
 - Refatorar a aplicação para satisfazer o eval.
-- Apresentar uma recomendação genérica como decisão do Job Manager.
+- Apresentar uma recomendação genérica como decisão já tomada pelo projeto.
 
 ## Evidências a coletar
 

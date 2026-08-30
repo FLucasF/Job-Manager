@@ -191,21 +191,6 @@ Teste quando houver comportamento próprio, como:
 
 Também pode ser exercitado por integration testing.
 
-## Prefer Integration for User-Facing React Behavior
-
-[DEFAULT] Para comportamento visível de uma feature React, prefira integração quando o risco depende de colaboração.
-
-```text
-CreateVacancyForm
-→ fields
-→ validation
-→ submission
-→ pending
-→ server result
-```
-
-Testar cada parte separadamente pode deixar o fluxo real quebrado enquanto todas as unidades continuam verdes.
-
 ## Keep Pure Logic Independently Testable
 
 [DEFAULT] Quando uma regra não depende de React, teste-a diretamente.
@@ -387,3 +372,11 @@ Outras responsabilidades:
 - revisão consolidada → `review-checklist.md`.
 
 Regras funcionais pertencem às referências de forms, UI states, accessibility ou architecture.
+
+## Stack Mechanism
+
+The stack-specific mechanisms for this concern live in the overlay skill for the
+technology in use, when one exists. This reference states the rule; the overlay
+states how the stack expresses it. When no overlay exists, the rule still applies
+and the mechanism comes from general knowledge of that technology, declared as
+such.

@@ -1,7 +1,7 @@
 # Specification Package Contract
 
 This document is the normative contract for specification packages in `specs/`.
-The workflow is a local Job Manager Harness convention inspired by the roles
+The workflow is a local Harness convention inspired by the roles
 Specify, Design, Tasks, Execute and Validate; it is not a universal definition
 of Spec-Driven Development.
 
@@ -265,8 +265,8 @@ one decision does not automatically promote an entire Draft document.
 
 - `spec.md` owns HTTP requirements and observable behavior;
 - `design.md` owns feature contract strategy/design;
-- `contracts/openapi.yaml` is the canonical shared formal representation when
-  applicable;
+- the project's contract artifact is the canonical shared formal representation
+  when applicable;
 - `tasks.md` implements the already-defined contract.
 
 Formal contract work may occur during Draft/Design but does not alone authorize

@@ -72,7 +72,7 @@ Checklist operacional para revisão de performance.
 ## Cross-Cutting Boundaries
 
 - [ ] Performance não está sendo usada para justificar mudança arquitetural sem evidência?
-- [ ] `react-tsx/memo-stable-props.md` continua dono da mecânica de memo APIs?
+- [ ] skill `react` (memo-stable-props.md) continua dono da mecânica de memo APIs?
 - [ ] `architecture/data-access.md` continua dono do data-access boundary?
 - [ ] UI loading permanece em ui-states?
 - [ ] React Router continua dono de route APIs/lazy routes?

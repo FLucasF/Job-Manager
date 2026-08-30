@@ -104,37 +104,6 @@ source tooling
 
 [DEFAULT] Use build de produção para validar impacto real quando a tarefa depende de números.
 
-## React DevTools Profiler
-
-[DEFAULT] Para problema de rendering React, use React DevTools Profiler antes de aplicar memoization manual.
-
-Procure:
-
-```text
-which interaction triggered render?
-which subtree consumed meaningful time?
-which components rerendered?
-was the work expensive or merely frequent?
-```
-
-[HARD RULE] "Renderizou novamente" não significa automaticamente "problema de performance".
-
-Render barato pode ser preferível a complexidade de memoization.
-
-## React `<Profiler>`
-
-[SITUATIONAL] Use `<Profiler>` quando a aplicação/teste precisa coletar timing programaticamente para uma subtree.
-
-Exemplo conceitual:
-
-```tsx
-<Profiler id="VacancyList" onRender={onRender}>
-  <VacancyList />
-</Profiler>
-```
-
-[HARD RULE] Não mantenha instrumentation de profiling espalhada pela aplicação sem uma finalidade explícita.
-
 ## `actualDuration` vs `baseDuration`
 
 [SITUATIONAL] Ao usar `<Profiler>`, interprete as métricas no contexto:
@@ -303,3 +272,11 @@ Outras responsabilidades:
 - code/bundle loading → `bundle-loading.md`;
 - requests/cache/waterfalls → `data-network.md`;
 - Core Web Vitals/browser metrics → `browser-performance.md`.
+
+## Stack Mechanism
+
+The stack-specific mechanisms for this concern live in the overlay skill for the
+technology in use, when one exists. This reference states the rule; the overlay
+states how the stack expresses it. When no overlay exists, the rule still applies
+and the mechanism comes from general knowledge of that technology, declared as
+such.

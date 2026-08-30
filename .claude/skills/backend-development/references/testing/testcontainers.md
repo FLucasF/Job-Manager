@@ -30,14 +30,6 @@ Tests should create or reuse disposable infrastructure through the test setup.
 Do not depend on a manually running developer database for automated
 integration-test correctness.
 
-## Spring Boot Integration
-
-Use Spring Boot's Testcontainers integration/service connections when it makes
-connection configuration simpler and explicit.
-
-Do not duplicate manual dynamic-property wiring when the framework integration
-already expresses the connection correctly.
-
 ## Container Lifecycle
 
 Choose lifecycle according to test isolation and suite performance.
@@ -68,3 +60,11 @@ Fail clearly when required infrastructure cannot start.
 - container reuse that leaks test data
 - manual connection configuration duplicated across tests
 - Testcontainers for pure unit tests
+
+## Stack Mechanism
+
+The stack-specific mechanisms for this concern live in the overlay skill for the
+technology in use, when one exists. This reference states the rule; the overlay
+states how the stack expresses it. When no overlay exists, the rule still applies
+and the mechanism comes from general knowledge of that technology, declared as
+such.

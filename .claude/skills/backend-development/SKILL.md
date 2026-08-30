@@ -1,11 +1,12 @@
 ---
 name: backend-development
-description: Implements, modifies, fixes, refactors, and reviews Java and Spring Boot backends from an applicable Ready package in specs/ or an explicit user request. Use for backend architecture, Spring MVC and REST contracts, JPA and transactions, security, observability, and backend unit or integration tests. Do not use for frontend work or complete E2E/browser journeys.
+description: Implements, modifies, fixes, refactors and reviews server-side application code from an applicable Ready package in specs/ or an explicit user request. Use for backend architecture, HTTP contracts, persistence and transactions, security, observability and backend unit or integration tests, independently of language or framework. Detect the boundary's technologies from the repository and load every stack overlay skill that exists for them; when none exists, apply general knowledge of that technology for idioms only and say so. Do not use for client-side work or complete end-to-end browser journeys.
 ---
 
 # Backend Development
 
-Use this skill for Java and Spring Boot backend work. `CLAUDE.md` governs the
+Use this skill for server-side application work in any language. `CLAUDE.md`
+governs the
 spec gate, RPI workflow, architecture authority, security, validation, and
 completion.
 
@@ -36,15 +37,39 @@ explicit implementation request does not silently resolve that decision.
    infrastructure details; adapt those concerns at their intended boundaries.
 5. Treat API and database changes as compatibility-sensitive and synchronize
    contracts and versioned migrations when required.
-6. Add unit tests for isolated Java/domain behavior and integration tests for
-   Spring, HTTP, persistence, security, or infrastructure collaboration. Route
+6. Add unit tests for isolated domain behavior and integration tests for
+   framework, HTTP, persistence, security, or infrastructure collaboration. Route
    complete browser journeys to `quality-assurance`.
-7. Run `apps/backend/mvnw.cmd test`, then map results to every applicable backend
-   acceptance criterion and relevant failure path.
+7. Run the validation commands that `.claude/validation.json` declares for the
+   affected boundary, exactly as written, then map results to every applicable
+   backend acceptance criterion and relevant failure path.
 
 For review, start with the checklist for each affected concern. Open detailed
 references only for concrete questions raised by the checklist; never load the
 whole library.
+
+## Stack Overlay
+
+This skill owns concerns that hold regardless of language: architecture,
+persistence, security, web, testing and observability. It does not carry the
+idioms of any particular stack.
+
+Determine the affected boundary's technologies from the repository itself, then
+look for a matching overlay skill. Language and framework are separate overlays;
+load every one that exists.
+
+- When an overlay exists, load it. Its idioms are repository authority.
+- When no overlay exists, apply your own knowledge of that technology and say so:
+  name the technology and state that its idioms come from general knowledge
+  rather than from repository authority.
+
+The fallback covers idioms only. It never authorizes a dependency, a library
+choice, an architectural pattern, a tool or observable behavior. This skill,
+`CLAUDE.md` and the accepted architecture continue to govern the work unchanged,
+overlay or not.
+
+The concern reference states the rule; the overlay states the mechanism. If they
+appear to disagree, the rule wins and the disagreement is reported.
 
 ## Reference Routing
 
@@ -71,53 +96,9 @@ boundaries, dependency direction, SOLID, cohesion, or coupling.
 For structural changes, read `project-structure.md` and only the additional
 architecture references required by the decision.
 
-### Java
-
-Use for language-level safety and design decisions independent of Spring.
-
-- Type safety, raw types, casts, explicit domain types, and enums:
-  [type-safety.md](references/java/type-safety.md)
-- Nullability and `Optional` contracts:
-  [nullability-optional.md](references/java/nullability-optional.md)
-- Immutability, defensive copies, and records:
-  [immutability-records.md](references/java/immutability-records.md)
-- Lombok usage policy:
-  [lombok.md](references/java/lombok.md)
-- Exception design and handling:
-  [exceptions.md](references/java/exceptions.md)
-- Collection semantics and ownership:
-  [collections.md](references/java/collections.md)
-- Generic APIs, bounds, and wildcards:
-  [generics.md](references/java/generics.md)
-- Date/time types, timezone handling, and testable clocks:
-  [date-time.md](references/java/date-time.md)
-- Java review:
-  [review-checklist.md](references/java/review-checklist.md)
-
-Do not read Java references merely because the project is written in Java.
-Load them when the task involves the corresponding design decision.
-
-### Spring
-
-Use for Spring container, component, and runtime-configuration decisions.
-
-- Constructor injection, bean selection, and dependency visibility:
-  [dependency-injection.md](references/spring/dependency-injection.md)
-- Spring stereotypes, bean responsibilities, scopes, and component ownership:
-  [component-design.md](references/spring/component-design.md)
-- Externalized and typed Spring Boot configuration:
-  [configuration.md](references/spring/configuration.md)
-- Environment-specific configuration and profiles:
-  [profiles.md](references/spring/profiles.md)
-- Spring review:
-  [review-checklist.md](references/spring/review-checklist.md)
-
-Do not create a separate configuration abstraction when existing Spring
-configuration or security-secret references already cover the concern.
-
 ### Web
 
-Use for Spring MVC and REST API boundary decisions.
+Use for HTTP and REST API boundary decisions.
 
 - Controller responsibilities and delegation:
   [controllers.md](references/web/controllers.md)
@@ -134,22 +115,23 @@ Use for Spring MVC and REST API boundary decisions.
 - Web review:
   [review-checklist.md](references/web/review-checklist.md)
 
-Use Spring MVC as the HTTP adapter of the web boundary. Do not reorganize the
+Use the stack's HTTP framework as the adapter of the web boundary. Do not
+reorganize the
 whole project into global MVC technical folders; read the architecture
 references when package structure is involved.
 
 ### Persistence
 
-Use for JPA, Hibernate, Spring Data, relational schema, indexing, database,
+Use for object-relational mapping, relational schema, indexing, database,
 query, and transaction decisions.
 
-- JPA entity boundaries, identity, mutation, and database constraints:
+- Entity boundaries, identity, mutation, and database constraints:
   [entities.md](references/persistence/entities.md)
 - Relational schema, keys, column types, constraints, and normalization:
   [schema-design.md](references/persistence/schema-design.md)
-- Repository contracts and Spring Data repository placement:
+- Repository contracts and repository placement:
   [repositories.md](references/persistence/repositories.md)
-- JPA relationships, ownership, cascade, and lifecycle:
+- Entity relationships, ownership, cascade, and lifecycle:
   [relationships.md](references/persistence/relationships.md)
 - Transaction boundaries and rollback behavior:
   [transactions.md](references/persistence/transactions.md)
@@ -169,7 +151,7 @@ query, and transaction decisions.
   [review-checklist.md](references/persistence/review-checklist.md)
 
 Read only the persistence reference for the concrete persistence concern. Do
-not load all JPA references for a simple repository change.
+not load all persistence references for a simple repository change.
 
 ### Security
 
@@ -221,8 +203,6 @@ Use for production diagnostics, telemetry, health, and management endpoints.
   [tracing.md](references/observability/tracing.md)
 - Liveness, readiness, and health checks:
   [health-checks.md](references/observability/health-checks.md)
-- Spring Boot Actuator endpoint exposure:
-  [actuator-exposure.md](references/observability/actuator-exposure.md)
 - Observability review:
   [review-checklist.md](references/observability/review-checklist.md)
 
@@ -231,18 +211,18 @@ When logging may contain credentials or personal data, also read
 
 ### Testing
 
-Use for backend test scope, Spring integration testing, persistence testing,
+Use for backend test scope, integration testing, persistence testing,
 security testing, and structural architecture verification.
 
 - Test scope and overall strategy:
   [test-strategy.md](references/testing/test-strategy.md)
-- Java-level unit tests without Spring context:
+- Unit tests without framework context:
   [unit-testing.md](references/testing/unit-testing.md)
-- Spring/infrastructure integration tests:
+- Infrastructure integration tests:
   [integration-testing.md](references/testing/integration-testing.md)
-- Spring MVC/controller contract tests:
+- Controller and HTTP contract tests:
   [controller-testing.md](references/testing/controller-testing.md)
-- JPA/repository/database tests:
+- Repository and database tests:
   [repository-testing.md](references/testing/repository-testing.md)
 - Mocking boundaries and interaction verification:
   [mocking.md](references/testing/mocking.md)
@@ -255,12 +235,12 @@ security testing, and structural architecture verification.
 - Testing review:
   [review-checklist.md](references/testing/review-checklist.md)
 
-Do not add Testcontainers, ArchUnit, Spring Modulith, or another testing tool
+Do not add a new testing tool, library or framework
 unless the project already uses it and the applicable Ready spec or explicit
 user request requires the relevant behavior.
 Do not install dependencies or invent tooling from reference guidance.
 
-Map pure Java/domain rules to backend unit tests and collaboration with Spring,
+Map pure domain rules to backend unit tests and collaboration with the framework,
 HTTP, persistence, or infrastructure to backend integration tests. Map each
 test to a behavior or acceptance criterion; do not add tests solely to increase
 numeric coverage. Route any complete browser/system journey to
@@ -284,7 +264,7 @@ Usually consider:
   sensitive data
 - the relevant testing reference when adding or changing tests
 
-Do not load unrelated persistence or Java references unless the endpoint
+Do not load unrelated persistence or language references unless the endpoint
 actually touches those concerns.
 
 ### Persistence Change

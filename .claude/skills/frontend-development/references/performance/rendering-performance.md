@@ -69,7 +69,7 @@ render
 
 quando o valor pode ser calculado durante render.
 
-Detalhes pertencem a react-tsx/effects-synchronization.
+Detalhes pertencem a skill `react` (effects-synchronization.md).
 
 ## Expensive Pure Calculations
 
@@ -84,18 +84,6 @@ memoization
 
 [HARD RULE] Não escolha `useMemo` antes de verificar se o cálculo é realmente caro no hot path.
 
-## React Compiler
-
-[HARD RULE] Antes de recomendar `React.memo`, `useMemo` ou `useCallback` em código novo, verifique se React Compiler está habilitado no projeto.
-
-Quando habilitado, o Compiler pode aplicar memoization automaticamente.
-
-[DEFAULT] Em código novo compilado, confie primeiro na otimização do Compiler e use memoization manual apenas quando existir necessidade de controle/evidência.
-
-[HARD RULE] Não remova memoization existente em massa só porque Compiler está habilitado.
-
-Mudanças em memoization existente precisam de validação.
-
 ## Compiler Directives
 
 [SITUATIONAL] Diretivas como:
@@ -108,24 +96,6 @@ Mudanças em memoization existente precisam de validação.
 dependem da configuração do React Compiler.
 
 [HARD RULE] Não adicione diretiva sem verificar `compilationMode` e necessidade real.
-
-## `React.memo`
-
-[SITUATIONAL] Use quando:
-
-```text
-component rerenders frequently
-+
-props often remain equivalent
-+
-render cost is meaningful
-+
-profiling shows benefit
-```
-
-[HARD RULE] `memo` é performance optimization, não correção de comportamento.
-
-Se component quebra ao rerenderizar, corrija pure rendering/state/effects.
 
 ## `useMemo`
 
@@ -176,7 +146,7 @@ child memoization exists/helps
 identity is the reason it rerenders
 ```
 
-Detalhes da API pertencem a react-tsx/memo-stable-props.
+Detalhes da API pertencem a skill `react` (memo-stable-props.md).
 
 ## Component Boundaries
 
@@ -244,12 +214,6 @@ Correctness de keys vem antes da performance.
 
 Escolha conforme o comportamento desejado.
 
-## Main Thread Work Outside React
-
-[HARD RULE] Se profiling mostra custo em parsing, third-party script, layout ou outro código fora do render React, não tente resolver com `memo`.
-
-Use o boundary responsável.
-
 ## Common Bug Patterns
 
 Evite:
@@ -277,7 +241,15 @@ Esta referência é dona de:
 
 Outras responsabilidades:
 
-- mechanics de memo APIs → react-tsx/memo-stable-props;
-- effects correctness → react-tsx/effects-synchronization;
+- mechanics de memo APIs → skill `react` (memo-stable-props.md);
+- effects correctness → skill `react` (effects-synchronization.md);
 - state ownership → architecture/state-placement;
 - profiling → `measurement-profiling.md`.
+
+## Stack Mechanism
+
+The stack-specific mechanisms for this concern live in the overlay skill for the
+technology in use, when one exists. This reference states the rule; the overlay
+states how the stack expresses it. When no overlay exists, the rule still applies
+and the mechanism comes from general knowledge of that technology, declared as
+such.

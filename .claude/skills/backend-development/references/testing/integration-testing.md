@@ -5,14 +5,6 @@ configuration or infrastructure interaction.
 
 Prefer the smallest integration scope that proves the boundary.
 
-## Use Spring Test Support Deliberately
-
-Use the Spring TestContext Framework when the test needs managed application
-configuration, transactions, security, or framework integration.
-
-Use `@SpringBootTest` only when the full application context is part of what the
-test must prove.
-
 ## Verify Real Boundaries
 
 Good integration-test targets include:
@@ -73,3 +65,11 @@ that accumulate state.
 - shared mutable database state
 - excessive `@DirtiesContext`
 - assuming rollback proves after-commit behavior
+
+## Stack Mechanism
+
+The stack-specific mechanisms for this concern live in the overlay skill for the
+technology in use, when one exists. This reference states the rule; the overlay
+states how the stack expresses it. When no overlay exists, the rule still applies
+and the mechanism comes from general knowledge of that technology, declared as
+such.

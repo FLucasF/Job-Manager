@@ -10,20 +10,25 @@ Uso da exploração nativa, separação entre investigação e implementação e
 
 ## Estado inicial necessário
 
-Checkout atual conhecido contendo `apps/backend/`, `apps/frontend/`, `contracts/` e `specs/`. Nenhuma feature ou spec de exemplo deve ser criada.
+Um **repositório-alvo** com o harness instalado: `CLAUDE.md`, `.claude/` e
+`specs/` copiados para a raiz, e `.claude/validation.json` declarando os
+boundaries do projeto. Registre o repositório, o commit e o estado inicial.
+
+O alvo deve declarar pelo menos dois boundaries de aplicação em
+`.claude/validation.json`. Nenhuma feature ou spec de exemplo deve ser criada.
 
 ## Prompt de avaliação
 
 ```text
-Investigue quais partes do repositório provavelmente seriam afetadas por uma futura funcionalidade que envolvesse backend e frontend.
+Investigue quais partes do repositório provavelmente seriam afetadas por uma futura funcionalidade que atravessasse dois boundaries de aplicação.
 
 Não implemente nada e não defina requisitos da funcionalidade.
 ```
 
 ## Comportamento esperado
 
-- Identificar `apps/backend` e `apps/frontend` como boundaries observadas.
-- Mencionar `contracts/` somente como possível boundary compartilhada, deixando claro que está vazio ou não há contrato observado.
+- Identificar as boundaries de aplicação declaradas no manifesto do alvo.
+- Mencionar uma boundary de contrato compartilhado somente se o alvo declarar uma, deixando claro quando está vazia ou não há contrato observado.
 - Distinguir fatos atuais de possibilidades condicionais.
 - Usar exploração proporcional e não modificar arquivos.
 

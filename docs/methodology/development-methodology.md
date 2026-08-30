@@ -1,8 +1,8 @@
-# Development Methodology — Job Manager
+# Development Methodology
 
 ## Document role
 
-This document explains how Job Manager uses discovery, specification, design,
+This document explains how the harness uses discovery, specification, design,
 delivery and validation methods. It does not own product behavior, domain rules,
 architecture or formal contracts, and it does not present the local workflow as
 a universal definition of Spec-Driven Development.
@@ -26,7 +26,7 @@ The project may use, proportionally and when relevant:
 - independent review/verification for post-implementation evidence.
 
 Using a method does not automatically adopt every practice or tool commonly
-associated with it. In particular, Job Manager does not require global state
+associated with it. In particular, the harness does not require global state
 files, lessons files, mandatory context files, autonomous resolution of material
 ambiguity, per-task auto-commits, specific sub-agent batching, mutation testing
 for every feature, task-count thresholds, model tiers or editor-specific tools.
@@ -50,13 +50,13 @@ post-implementation evidence
 → proportional verification evidence for directly authorized work
 
 durable domain knowledge
-→ accepted docs/domain documents
+→ the project's accepted domain documents
 
 project-wide architecture
-→ accepted docs/architecture documents and ADRs
+→ the project's accepted architecture documents and ADRs
 
 formal external representation
-→ contracts/, when applicable
+→ the project's contract artifact, when applicable
 ```
 
 Discovery, methodology, templates, Draft/Open documents, code and examples are
@@ -103,7 +103,7 @@ validation.md
 PASS | FAIL
 ```
 
-`Ready` and mandatory human approval are local Job Manager Harness policies for
+`Ready` and mandatory human approval are local Harness policies for
 package-driven work. Ready authorizes execution within that workflow. An explicit
 user request may authorize work without a package. Validation occurs afterward;
 PASS does not redefine the spec, and FAIL starts correction plus re-verification.
@@ -143,17 +143,17 @@ Formal contract work may happen during Draft/Design. In package-driven work, the
 spec owns externally observable requirements and the design owns the feature's
 contract strategy. In directly authorized work, the explicit request owns the
 observable requirements and the bounded local Plan maps their contract strategy.
-`contracts/openapi.yaml` is the shared formal representation when applicable in
-either path.
+The project's contract artifact is the shared formal representation when
+applicable in either path.
 
 A Draft contract does not authorize implementation by itself. Package-driven
 work requires the applicable contract to be sufficiently defined and consistent
 before Ready. Directly requested work may define the contract without a spec,
-but must not promote a historical/provisional OpenAPI or invent behavior absent
-from the user's request or another accepted source. It may create
-`contracts/openapi.yaml` only after `ARCH-OPEN-008` is accepted. OpenAPI linting,
-compatibility checking, publication, generation or stub tooling additionally
-requires accepted `ARCH-OPEN-004`.
+but must not promote a historical or provisional contract, nor invent behavior
+absent from the user's request or another accepted source. Adopting a formal
+contract format, or tooling for linting, compatibility checking, publication,
+generation or stubs, is a project-wide architecture decision and requires
+explicit acceptance before use.
 
 ## Tasks
 
